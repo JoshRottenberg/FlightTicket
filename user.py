@@ -1,12 +1,18 @@
 class User:
-    def __init__(self, id, name, last_name, phone_num, email, password, loged_in=bool):
-        self._id = id
-        self._name = name
+    num_of_users = 1
+    users = []
+
+    def __init__(self, first_name, last_name, phone_num, email, password, is_signed_in=False, logged_in=False):
+        self._id = User.num_of_users
+        self._name = first_name
         self._last_name = last_name
         self._phone_num = phone_num
         self._email = email
         self._password = password
-        self._is_loged_in = loged_in
+        self._is_signed_in = is_signed_in
+        self._is_logged_in = logged_in
+        User.num_of_users += 1
+        User.users.append(self)
 
     @property
     def id(self):
