@@ -6,6 +6,7 @@ from order import Order
 from flight import Flight
 from flights import Flights
 from exeptions import *
+import sqlite3
 
 
 def create_new_user():
@@ -41,14 +42,36 @@ def create_new_user():
 def check_if_user():
     user_name = input("Please enter your username (Email): ")
     password = input("Please enter your password: ")
-    with open('users_instances.txt', 'r') as file:
-        for line in file:
-            words = line.strip().split(',')
-            if words[7] == user_name and words[9] == password:
-                print(f"welcome back {words[1]}!")
-                return True
-        print("one of the details isn't correct, please retry")
+    # Connect to the database
+    conn = sqlite3.connect('user_data.db')
+    cursor = conn.cursor()
+    # Execute a SELECT query to retrieve the user with the given username and password
+    cursor.execute('SELECT * FROM users WHERE email = ? AND password = ?', (user_name, password))
+    row = cursor.fetchone()
+    # Close the connection
+    conn.close()
+    if row is not None:
+        # User found in the database
+        print(f"Welcome back, {row[1]}!")
+        return True
+    else:
+        # User not found in the database or invalid credentials
+        print("One of the details is incorrect. Please retry.")
         return False
+
+
+def search_for_flights():
+    origin_state = input("From which country are you flying from?: ")
+    origin_city = input("From which city are you flying from?: ")
+    is_available_flight = False
+    while not is_available_flight:
+        destination_state = input("To which country are you flying to?: ")
+        destination_city = input("To which city are you flying to?: ")
+        departure_date = input("please enter your departure date:  (yyyy/mm/dd)")
+        num_of_passengers = int(input("how many travelers?: "))
+        if flight_found(origin_city=origin_city,destination_city=destination_city,departure_date=departure_date,num_of_seats=num_of_passengers):
+            is_available_flight = True
+    return num_of_passengers
 
 
 def main():
@@ -61,6 +84,23 @@ def main():
         elif is_new.lower() == 'y' or is_new.lower() == 'yes':
             if check_if_user():
                 break
+
+    # print("Let's find the perfect flight for you")
+    # search_for_flights()
+    # num_of_travelers = search_for_flights()
+    # print("Congratulations!! you have find the perfect flight for you!!")
+    # while True:
+    #     new_order = input("do you want to open  a new order? (y/n):")
+    #     if new_order.lower() == 'y' or new_order.lower() == 'yes':
+    #         create_new_order()
+    #         break
+    #     elif is_new.lower() == 'y' or is_new.lower() == 'yes':
+    #         if check_if_user():
+    #             break
+
+
+
+
 
     return  # Close the main function
 
