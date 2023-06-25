@@ -4,7 +4,7 @@ from passenger import Passenger
 from ticket import Ticket
 from order import Order
 from flight import Flight
-from flights import Flights
+from flights import *
 from exeptions import *
 import sqlite3
 
