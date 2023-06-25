@@ -2,14 +2,14 @@ class User:
     # num_of_users = 1
     # users = []
 
-    def __init__(self, first_name, last_name, phone_num, email, password, is_signed_in=False, logged_in=False):
+    def __init__(self, first_name, last_name, phone_num, email, password, is_signed_up=False, logged_in=False):
         # self._id = User.num_of_users
         self._name = first_name
         self._last_name = last_name
         self._phone_num = phone_num
         self._email = email
         self._password = password
-        self._is_signed_in = is_signed_in
+        self._is_signed_up = is_signed_up
         self._is_logged_in = logged_in
         # User.num_of_users += 1
         # User.users.append(self)
@@ -75,5 +75,5 @@ class User:
         with open('users_instances.txt', 'a') as file:
             file.write(f"first name,{self._name}, last name,{self._last_name},"
                        f" phone number,{self._phone_num}, email,{self._email},"
-                       f" password,{self._password}, signed?,{self._is_signed_in},"
+                       f" password,{self._password}, signed?,{self._is_signed_up},"
                        f" logged?,{self._is_logged_in}  \n")
