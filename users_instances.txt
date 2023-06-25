@@ -2,4 +2,3 @@ first name,Josh, last name,Rott, phone number,0543978733, email,yrott02@gmail.co
 first name,Pini, last name,Kaminer, phone number,0542236754, email,pinika@yahoo.com, password,9876, signed?,True, logged?,False  
 first name,Barak, last name,Haviv, phone number,0556734466, email,barak@haviv.com, password,barakha, signed?,True, logged?,False  
 first name,Nati, last name,Dahan, phone number,0526382545, email,natidahan@gmail.com, password,natis, signed?,True, logged?,False
-first name,a, last name,b, phone number,c, email,d, password,f, signed?,True, logged?,False  

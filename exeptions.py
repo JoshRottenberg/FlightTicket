@@ -1,4 +1,3 @@
-
 import string
 
 
@@ -13,12 +12,12 @@ class NameContainsIllegalCharacter(Exception):
 
 class NameTooShort(Exception):
     def __str__(self):
-        return f"username is too short"
+        return f"Name is too short"
 
 
 class NameTooLong(Exception):
     def __str__(self):
-        return f"username is too long"
+        return f"Name is too long"
 
 
 class PasswordMissingCharacter(Exception):
@@ -98,8 +97,9 @@ def validate_name(name):
                 raise NameContainsIllegalCharacter(name[i], i)
         if len(name) < 2:
             raise NameTooShort
-        if len(name) > 16:
+        elif len(name) > 16:
             raise NameTooLong
+        return True
 
     except NameContainsIllegalCharacter as a:
         print(a)
@@ -113,13 +113,14 @@ def validate_name(name):
 
 def validate_phone_num(phone_num):
     try:
-        if len(phone_num) < 8:
+        if not all(char.isdigit() for char in phone_num):
+            raise PhoneNumNotDigits
+        elif len(phone_num) < 8:
             raise PhoneNumTooShort
         elif len(phone_num) > 14:
             raise PhoneNumTooLong
-        elif not all(char.isdigit() for char in phone_num):
-            raise PhoneNumNotDigits
 
+        return True
     except PhoneNumTooShort as a:
         print(a)
     except PhoneNumTooLong as b:
@@ -142,6 +143,7 @@ def validate_password(password):
             raise PasswordMissingDigit
         elif not any(char in string.punctuation for char in password):
             raise PasswordMissingSpecial
+        return True
 
     except PasswordMissingUppercase as d:
         print(d)
@@ -170,8 +172,9 @@ def validate_email(email):
             raise EmailTooLong
         elif '@' not in email or '.' not in email:
             raise EmailMissingCharacter
-        elif email.startwith('@') or email.endwith('@') or ' ' in email:
+        elif email.startswith('@') or email.endswith('@') or ' ' in email:
             raise EmailIsNotValid
+        return True
 
     except EmailTooShort as a:
         print(a)
@@ -181,5 +184,3 @@ def validate_email(email):
         print(c)
     except EmailIsNotValid as d:
         print(d)
-
-
