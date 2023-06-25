@@ -1,9 +1,9 @@
 class User:
-    num_of_users = 1
-    users = []
+    # num_of_users = 1
+    # users = []
 
     def __init__(self, first_name, last_name, phone_num, email, password, is_signed_in=False, logged_in=False):
-        self._id = User.num_of_users
+        # self._id = User.num_of_users
         self._name = first_name
         self._last_name = last_name
         self._phone_num = phone_num
@@ -11,8 +11,9 @@ class User:
         self._password = password
         self._is_signed_in = is_signed_in
         self._is_logged_in = logged_in
-        User.num_of_users += 1
-        User.users.append(self)
+        # User.num_of_users += 1
+        # User.users.append(self)
+        self.add_to_file()
 
     @property
     def id(self):
@@ -69,3 +70,10 @@ class User:
     @logged_in.setter
     def logged_in(self, value):
         self._is_logged_in = value
+
+    def add_to_file(self):
+        with open('users_instances.txt', 'a') as file:
+            file.write(f"first name,{self._name}, last name,{self._last_name},"
+                       f" phone number,{self._phone_num}, email,{self._email},"
+                       f" password,{self._password}, signed?,{self._is_signed_in},"
+                       f" logged?,{self._is_logged_in}  \n")

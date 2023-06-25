@@ -14,22 +14,20 @@ def create_new_user():
     email = input("Please enter your Email address: ")
     new_password = input("What is your password: ")
     current_user = User(first_name=first_name, last_name=last_name, phone_num=phone_num, email=email,
-                        password=new_password)
-    # User.users.append(current_user)
-    print(User.users)
+                        password=new_password, is_signed_in=True)
 
 
 def check_if_user():
     user_name = input("Please enter your username (Email): ")
     password = input("Please enter your password: ")
-    for user in User.users:
-        if user_name == user.email and password == user.password:
-            current_user = user
-            print(f"welcome back {user.first_name}!")
-            return False
-        if not any(user_name == user.email) or (user_name == user.email and password != user.password):
-            print("error!")
-            return True
+    with open('users_instances.txt', 'r') as file:
+        for line in file:
+            words = line.strip().split(',')
+            if words[7] == user_name and words[9] == password:
+                print(f"welcome back {words[1]}!")
+                return True
+        print("one of the details isn't correct, please retry")
+        return False
 
 
 def main():
@@ -40,7 +38,9 @@ def main():
             create_new_user()
             break
         elif is_new.lower() == 'y':
-            check_if_user()
+            if check_if_user():
+                break
+
 
     return  # Close the main function
 
