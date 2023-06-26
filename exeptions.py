@@ -62,7 +62,7 @@ class EmailTooShort(Exception):
 
 class EmailTooLong(Exception):
     def __str__(self):
-        return f"Email is too short"
+        return f"Email is too long"
 
 
 class EmailMissingCharacter(Exception):
@@ -168,7 +168,7 @@ def validate_email(email):
     try:
         if len(email) < 4:
             raise EmailTooShort
-        elif len(email) > 20:
+        elif len(email) > 30:
             raise EmailTooLong
         elif '@' not in email or '.' not in email:
             raise EmailMissingCharacter
