@@ -80,12 +80,21 @@ def search_for_flights(num_of_travelers):
 
 
 def add_passenger():
-    p_f_name = input("Please enter passenger's first name: ")
-#     p_l_name = input("Please enter passenger's last name: ")
-#     p_dob = input("Please enter passenger's D.O.B (dd/nn/yyyy): ")
-#     p_pass_num = input("Please enter passenger's passport number: ")
-#
-#     new_passenger = Passenger(first_name=first_name, last_name=last_name, )
+    pf_name_status = False
+    while not pf_name_status:
+        p_f_name = input("Please enter passenger's first name: ")
+        pf_name_status = validate_name(p_f_name)
+
+    pl_name_status = False
+    while not pl_name_status:
+        p_l_name = input("Please enter passenger's last name: ")
+        pl_name_status = validate_name(p_l_name)
+
+    p_dob = input("Please enter passenger's D.O.B (yyyy-mm-dd): ") # add exeptions
+    p_pass_num = input("Please enter passenger's passport number: ") # add exeption
+
+    new_passenger = Passenger(first_name=p_f_name, last_name=p_l_name,dob=p_dob,passport=p_pass_num)
+
 
 def crate_new_order():
     pass

@@ -1,10 +1,14 @@
+import sqlite3
+
+
 class Passenger:
-    def __init__(self):
+    def __init__(self, first_name, last_name, dob, passport):
         self._id = None
-        self._first_name = None
-        self._last_name = None
-        self._dob = None
-        self._passport = None
+        self._first_name = first_name
+        self._last_name = last_name
+        self._dob = dob
+        self._passport = passport
+        self.add_to_psngr_db()
 
     @property
     def id(self):
@@ -45,3 +49,14 @@ class Passenger:
     @passport.setter
     def passport(self, value):
         self._passport = value
+
+    def add_to_psngr_db(self):
+        # Insert the user into the database
+        conn = sqlite3.connect('passengers_data.db')
+        cursor = conn.cursor()
+        cursor.execute('''
+                INSERT INTO users (first_name, last_name, date_of_birth, passport_number)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (self._first_name, self._last_name, self._dob, self._passport))
+        conn.commit()
+        conn.close()
