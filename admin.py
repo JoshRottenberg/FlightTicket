@@ -6,7 +6,6 @@ class Admin(User):
     def __init__(self, id, name, last_name, phone_num, email, password):
         super().__init__(id, name, last_name, phone_num, email, password)
 
-
     def delete_user(user_id):
         # Connect to the database
         conn = sqlite3.connect('user_data.db')
