@@ -71,14 +71,12 @@ def search_for_flights(num_of_travelers):
     while not is_available_flight:
         # destination_state = input("To which country are you flying to?: ")
         destination_city = input("To which city are you flying to?: ")
-        departure_date = input("please enter your departure date:  (yyyy/mm/dd)")
+        departure_date = input("please enter your departure date (yyyy/mm/dd): ")
         # num_of_passengers = int(input("how many travelers?: "))
         if flight_found(origin_city=origin_city, destination_city=destination_city, departure_date=departure_date,
                         num_of_seats=num_of_passengers):
             is_available_flight = True
-        else:
-            print("We couldn't find a flight that matches your preferences. Let's try again")
-    return num_of_passengers
+    return True
 
 
 # def add_passenger():
@@ -93,7 +91,7 @@ def search_for_flights(num_of_travelers):
 def main():
     print("Hey! Welcome to the new friendly flight tickets reservation site")
     while True:
-        is_new = input("do you have an account? (y/n):")
+        is_new = input("do you have an account? (y/n): ")
         if is_new.lower() == 'n' or is_new.lower() == 'no':
             cur_user = create_new_user()
             break
