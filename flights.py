@@ -1,6 +1,7 @@
 import sqlite3
 from flight import Flight
 
+
 def flight_found(origin_city, destination_city, departure_date, num_of_seats):
     connection = sqlite3.connect("flights_base2.db")
     cursor = connection.cursor()
@@ -22,7 +23,6 @@ def flight_found(origin_city, destination_city, departure_date, num_of_seats):
         if num_of_seats > seats_avel:
             print("There are not enough available seats in any of the flights")
             return False
-
 
     if rows:
         num_of_flights = len(rows)
@@ -53,9 +53,10 @@ def flight_found(origin_city, destination_city, departure_date, num_of_seats):
         print("We couldn't find a flight that matches your preferences. Let's try again")
         return False
 
+
 def choose_flight(list):
-    chosen_i = int(input("Choose your preferred flight: ")) #add exeption
-    chosen_code = list[chosen_i-1][1]
+    chosen_i = int(input("Choose your preferred flight: "))  # add exeption
+    chosen_code = list[chosen_i - 1][1]
 
     conn = sqlite3.connect('flights_base2.db')
     cursor = conn.cursor()

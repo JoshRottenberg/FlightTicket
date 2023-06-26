@@ -11,7 +11,6 @@ class Flight:
         yield self._company
         yield self._distance
 
-
     @property
     def id(self):
         return self._id

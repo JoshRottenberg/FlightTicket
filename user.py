@@ -63,3 +63,11 @@ class User:
         conn.commit()
         conn.close()
 
+    def get_user_id(self):
+        conn = sqlite3.connect('user_data.db')
+        cursor = conn.cursor()
+        query = f"SELECT id FROM users WHERE email =  ?"
+        cursor.execute(query, (self._email,))
+
+        output = cursor.fetchall()
+        return output[0][0]

@@ -96,8 +96,13 @@ def add_passenger():
     new_passenger = Passenger(first_name=p_f_name, last_name=p_l_name,dob=p_dob,passport=p_pass_num)
 
 
-def crate_new_order():
+def create_new_order(user_id):
+    user_id = user_id
+    tickets_quantity = 0
+    order_price = 0
+    new_order = Order(user_id=user_id,num_of_tickets=tickets_quantity,total_price=order_price)
     pass
+
 
 
 def main():
@@ -119,7 +124,7 @@ def main():
     while True:
         new_order = input("Do you want to open a new order? (y/n): ")
         if new_order.lower() == 'y' or new_order.lower() == 'yes':
-            # create_new_order()
+            create_new_order(cur_user.get_user_id())
             break
         elif is_new.lower() == 'n' or is_new.lower() == 'no':
             print("OK, see you next time")
