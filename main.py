@@ -44,7 +44,7 @@ def check_if_user():
     user_name = input("Please enter your username (Email): ")
     password = input("Please enter your password: ")
     # Connect to the database
-    conn = sqlite3.connect('user_data.db')
+    conn = sqlite3.connect('big_data.db')
     cursor = conn.cursor()
     # Execute a SELECT query to retrieve the user with the given username and password
     cursor.execute('SELECT * FROM users WHERE email = ? AND password = ?', (user_name, password))

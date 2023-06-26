@@ -2,15 +2,15 @@ import sqlite3
 
 try:
     # Connect to the database
-    conn = sqlite3.connect('big_data.db')
+    conn = sqlite3.connect('psngrs_data.db')
     cursor = conn.cursor()
 
     # Execute a SELECT query to retrieve all rows from the "users" table
-    cursor.execute('SELECT * FROM users')
+    cursor.execute('SELECT * FROM passengers')
     rows = cursor.fetchall()
 
     # Print the column headers
-    print("ID | First Name | Last Name | Phone Number    | Email |        Password ")
+    print("ID | FIRST NAME  |   LAST NAME  | DOB   |  PASSPORT ")
 
     # Iterate over the rows and print the data
     for row in rows:
@@ -23,3 +23,4 @@ finally:
     # Close the connection
     if conn:
         conn.close()
+

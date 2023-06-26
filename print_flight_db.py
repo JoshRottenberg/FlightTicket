@@ -5,13 +5,12 @@ conn = sqlite3.connect('flights_base2.db')
 cursor = conn.cursor()
 
 # Execute the SELECT query to retrieve the TRANSACTIONID column
-cursor.execute("SELECT price FROM Flights LIMIT 150")
+cursor.execute("SELECT * FROM Flights LIMIT 10")
 rows = cursor.fetchall()
 
 # Print the TRANSACTIONID for each row
 for row in rows:
-    transaction_id = row[0]
-    print(transaction_id)
+    print(row)
 
 # Close the connection
 conn.close()

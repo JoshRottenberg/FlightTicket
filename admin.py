@@ -8,7 +8,7 @@ class Admin(User):
 
     def delete_user(user_id):
         # Connect to the database
-        conn = sqlite3.connect('user_data.db')
+        conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()
 
         # Execute the DELETE statement

@@ -54,7 +54,7 @@ class User:
 
     def add_to_DB(self):
         # Insert the user into the database
-        conn = sqlite3.connect('user_data.db')
+        conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()
         cursor.execute('''
                 INSERT INTO users (first_name, last_name, phone_num, email, password, is_signed_up)
@@ -64,7 +64,7 @@ class User:
         conn.close()
 
     def get_user_id(self):
-        conn = sqlite3.connect('user_data.db')
+        conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()
         query = f"SELECT id FROM users WHERE email =  ?"
         cursor.execute(query, (self._email,))
