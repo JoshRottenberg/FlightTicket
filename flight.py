@@ -5,6 +5,13 @@ class Flight:
         self._company = company
         self._distance = distance
 
+    def __iter__(self):
+        yield self._flight_code
+        yield self._date
+        yield self._company
+        yield self._distance
+
+
     @property
     def id(self):
         return self._id

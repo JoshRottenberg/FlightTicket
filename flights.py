@@ -56,7 +56,7 @@ def flight_found(origin_city, destination_city, departure_date, num_of_seats):
 
 def choose_flight(list):
     chosen_i = int(input("Choose your preferred flight: ")) #add exeption
-    chosen_code = list[chosen_i-1]
+    chosen_code = list[chosen_i-1][1]
 
     conn = sqlite3.connect('flights_base2.db')
     cursor = conn.cursor()
@@ -66,7 +66,7 @@ def choose_flight(list):
 
     if row:
         chosen_flight = row
-    new_flight = Flight(flight_code=row[0], date=row[1], company=row[3], distance=row[15])
-    for x in new_flight:
-        print(x)
-    return new_flight
+        new_flight = Flight(flight_code=row[0], date=row[1], company=row[3], distance=row[15])
+        return new_flight
+    else:
+        print("there is a problem")

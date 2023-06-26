@@ -75,6 +75,7 @@ def search_for_flights(num_of_travelers):
                         num_of_seats=num_of_passengers)
         if list_of_flights:
             is_available_flight = True
+
     chosen_flight = choose_flight(list_of_flights)
 
     return chosen_flight
@@ -106,7 +107,7 @@ def main():
 
     print("Let's find the perfect flight for you")
     num_of_travelers = int(input("how many travelers?: "))
-    search_for_flights(num_of_travelers)
+    new_flight = search_for_flights(num_of_travelers)
 
     while True:
         new_order = input("do you want to open  a new order? (y/n): ")
