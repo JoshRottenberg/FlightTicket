@@ -18,7 +18,7 @@ def flight_found(origin_city, destination_city, departure_date, num_of_seats):
     rows = cursor.fetchall()
 
     for row in rows:
-        seats_avel = row[-2]
+        seats_avel = row[16]
         if num_of_seats > seats_avel:
             print("There are not enough available seats in any of the flights")
             return False
