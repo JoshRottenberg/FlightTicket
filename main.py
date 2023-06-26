@@ -69,7 +69,7 @@ def search_for_flights(num_of_travelers):
     is_available_flight = False
     while not is_available_flight:
         destination_city = input("To which city are you flying to?: ")
-        departure_date = input("please enter your departure date (yyyy/mm/dd): ")
+        departure_date = input("Please enter your departure date (yyyy/mm/dd): ")
 
         list_of_flights = flight_found(origin_city=origin_city, destination_city=destination_city, departure_date=departure_date,
                         num_of_seats=num_of_passengers)
@@ -96,7 +96,7 @@ def crate_new_order():
 def main():
     print("Hey! Welcome to the new friendly flight tickets reservation site")
     while True:
-        is_new = input("do you have an account? (y/n): ")
+        is_new = input("Do you have an account? (y/n): ")
         if is_new.lower() == 'n' or is_new.lower() == 'no':
             cur_user = create_new_user()
             break
@@ -106,11 +106,11 @@ def main():
                 break
 
     print("Let's find the perfect flight for you")
-    num_of_travelers = int(input("how many travelers?: "))
+    num_of_travelers = int(input("How many travelers?: "))
     new_flight = search_for_flights(num_of_travelers)
 
     while True:
-        new_order = input("do you want to open  a new order? (y/n): ")
+        new_order = input("Do you want to open a new order? (y/n): ")
         if new_order.lower() == 'y' or new_order.lower() == 'yes':
             # create_new_order()
             break
