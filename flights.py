@@ -1,5 +1,5 @@
 import sqlite3
-
+from flight import Flight
 
 def flight_found(origin_city, destination_city, departure_date, num_of_seats):
     connection = sqlite3.connect(r"C:\Users\User\PycharmProjects\pythonProject12\flights_base2.db")
@@ -26,6 +26,7 @@ def flight_found(origin_city, destination_city, departure_date, num_of_seats):
 
     if rows:
         num_of_flights = len(rows)
+        list_of_codes = []
         print(f" We have found {num_of_flights} flights for you")
         i = 0
         for row in rows:
@@ -42,11 +43,30 @@ def flight_found(origin_city, destination_city, departure_date, num_of_seats):
                 print(f"Arrival Time: {row[14][:-2] + ':' + row[14][-2:]}")
                 #print(f"Seats Available: {row[-1]}")
                 print()
+                trans_code_id = (i, row[0])
+                list_of_codes.append(trans_code_id)
 
     connection.close()
 
     if rows:
-        return True
+        return list_of_codes
     else:
         print("We couldn't find a flight that matches your preferences. Let's try again")
         return False
+
+def choose_flight(list):
+    chosen_i = int(input("Choose your preferred flight: ")) #add exeption
+    chosen_code = list[chosen_i-1]
+
+    conn = sqlite3.connect('flights_base2.db')
+    cursor = conn.cursor()
+    transaction_id = f'{chosen_code}'
+    cursor.execute("SELECT * FROM Flights WHERE TRANSACTIONID = ?", (transaction_id,))
+    row = cursor.fetchone()
+
+    if row:
+        chosen_flight = row
+    new_flight = Flight(flight_code=row[0], date=row[1], company=row[3], distance=row[15])
+    for x in new_flight:
+        print(x)
+    return new_flight

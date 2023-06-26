@@ -65,27 +65,31 @@ def check_if_user():
 
 def search_for_flights(num_of_travelers):
     num_of_passengers = num_of_travelers
-    # origin_state = input("From which country are you flying from?: ")
     origin_city = input("From which city are you flying from?: ")
     is_available_flight = False
     while not is_available_flight:
-        # destination_state = input("To which country are you flying to?: ")
         destination_city = input("To which city are you flying to?: ")
         departure_date = input("please enter your departure date (yyyy/mm/dd): ")
-        # num_of_passengers = int(input("how many travelers?: "))
-        if flight_found(origin_city=origin_city, destination_city=destination_city, departure_date=departure_date,
-                        num_of_seats=num_of_passengers):
+
+        list_of_flights = flight_found(origin_city=origin_city, destination_city=destination_city, departure_date=departure_date,
+                        num_of_seats=num_of_passengers)
+        if list_of_flights:
             is_available_flight = True
-    return True
+    chosen_flight = choose_flight(list_of_flights)
+
+    return chosen_flight
 
 
-# def add_passenger():
-#     p_f_name = input("Please enter passenger's first name: ")
+def add_passenger():
+    p_f_name = input("Please enter passenger's first name: ")
 #     p_l_name = input("Please enter passenger's last name: ")
 #     p_dob = input("Please enter passenger's D.O.B (dd/nn/yyyy): ")
 #     p_pass_num = input("Please enter passenger's passport number: ")
 #
 #     new_passenger = Passenger(first_name=first_name, last_name=last_name, )
+
+def crate_new_order():
+    pass
 
 
 def main():
@@ -103,15 +107,15 @@ def main():
     print("Let's find the perfect flight for you")
     num_of_travelers = int(input("how many travelers?: "))
     search_for_flights(num_of_travelers)
-    # print("Congratulations!! you have find the perfect flight for you!!")
-    # while True:
-    #     new_order = input("do you want to open  a new order? (y/n):")
-    #     if new_order.lower() == 'y' or new_order.lower() == 'yes':
-    #         # create_new_order()
-    #         break
-    #     elif is_new.lower() == 'n' or is_new.lower() == 'no':
-    #         print("OK, see you next time")
-    #         break
+
+    while True:
+        new_order = input("do you want to open  a new order? (y/n): ")
+        if new_order.lower() == 'y' or new_order.lower() == 'yes':
+            # create_new_order()
+            break
+        elif is_new.lower() == 'n' or is_new.lower() == 'no':
+            print("OK, see you next time")
+            break
 
     return  # Close the main function
 

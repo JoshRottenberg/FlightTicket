@@ -1,15 +1,9 @@
 class Flight:
-    def __init__(self):
-        self._id = None
-        self._flight_code = None
-        self._date = None
-        self._origin_code = None
-        self._dest_code = None
-        self._company = None
-        self._duration = None
-        self._distance = None
-        self._seats = None
-        self._available_seats = None
+    def __init__(self, flight_code, date, company, distance):
+        self._flight_code = flight_code
+        self._date = date
+        self._company = company
+        self._distance = distance
 
     @property
     def id(self):
