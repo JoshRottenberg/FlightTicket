@@ -36,7 +36,8 @@ def create_new_user():
         pass_status = validate_password(new_password)
 
     current_user = User(first_name=first_name, last_name=last_name, phone_num=phone_num, email=email,
-                        password=new_password, is_signed_up=True)
+                        password=new_password)
+    return current_user
 
 
 def check_if_user():
@@ -53,25 +54,40 @@ def check_if_user():
     if row is not None:
         # User found in the database
         print(f"Welcome back, {row[1]}!")
-        return True
+        current_user = User(email=user_name, password=password, is_signed_up=True)
+        return current_user
+        # return True
     else:
         # User not found in the database or invalid credentials
         print("One of the details is incorrect. Please retry.")
         return False
 
 
-# def search_for_flights():
-#     origin_state = input("From which country are you flying from?: ")
-#     origin_city = input("From which city are you flying from?: ")
-#     is_available_flight = False
-#     while not is_available_flight:
-#         destination_state = input("To which country are you flying to?: ")
-#         destination_city = input("To which city are you flying to?: ")
-#         departure_date = input("please enter your departure date:  (yyyy/mm/dd)")
-#         num_of_passengers = int(input("how many travelers?: "))
-#         if flight_found(origin_city=origin_city,destination_city=destination_city,departure_date=departure_date,num_of_seats=num_of_passengers):
-#             is_available_flight = True
-#     return num_of_passengers
+def search_for_flights(num_of_travelers):
+    num_of_passengers = num_of_travelers
+    # origin_state = input("From which country are you flying from?: ")
+    origin_city = input("From which city are you flying from?: ")
+    is_available_flight = False
+    while not is_available_flight:
+        # destination_state = input("To which country are you flying to?: ")
+        destination_city = input("To which city are you flying to?: ")
+        departure_date = input("please enter your departure date:  (yyyy/mm/dd)")
+        # num_of_passengers = int(input("how many travelers?: "))
+        if flight_found(origin_city=origin_city, destination_city=destination_city, departure_date=departure_date,
+                        num_of_seats=num_of_passengers):
+            is_available_flight = True
+        else:
+            print("We couldn't find a flight that matches your preferences. Let's try again")
+    return num_of_passengers
+
+
+# def add_passenger():
+#     p_f_name = input("Please enter passenger's first name: ")
+#     p_l_name = input("Please enter passenger's last name: ")
+#     p_dob = input("Please enter passenger's D.O.B (dd/nn/yyyy): ")
+#     p_pass_num = input("Please enter passenger's passport number: ")
+#
+#     new_passenger = Passenger(first_name=first_name, last_name=last_name, )
 
 
 def main():
@@ -79,28 +95,25 @@ def main():
     while True:
         is_new = input("do you have an account? (y/n):")
         if is_new.lower() == 'n' or is_new.lower() == 'no':
-            create_new_user()
+            cur_user = create_new_user()
             break
         elif is_new.lower() == 'y' or is_new.lower() == 'yes':
-            if check_if_user():
+            cur_user = check_if_user()
+            if cur_user:
                 break
 
-    # print("Let's find the perfect flight for you")
-    # search_for_flights()
-    # num_of_travelers = search_for_flights()
+    print("Let's find the perfect flight for you")
+    num_of_travelers = int(input("how many travelers?: "))
+    search_for_flights(num_of_travelers)
     # print("Congratulations!! you have find the perfect flight for you!!")
     # while True:
     #     new_order = input("do you want to open  a new order? (y/n):")
     #     if new_order.lower() == 'y' or new_order.lower() == 'yes':
-    #         create_new_order()
+    #         # create_new_order()
     #         break
-    #     elif is_new.lower() == 'y' or is_new.lower() == 'yes':
-    #         if check_if_user():
-    #             break
-
-
-
-
+    #     elif is_new.lower() == 'n' or is_new.lower() == 'no':
+    #         print("OK, see you next time")
+    #         break
 
     return  # Close the main function
 
