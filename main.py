@@ -22,7 +22,7 @@ def create_new_user():
 
     p_num_status = False
     while not p_num_status:
-        phone_num = input("Please enter your phone number: ")
+        phone_num = input("Please enter your phone num: ")
         p_num_status = validate_phone_num(phone_num)
 
     email_status = False
