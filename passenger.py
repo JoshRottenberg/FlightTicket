@@ -52,7 +52,7 @@ class Passenger:
 
     def add_to_psngr_db(self):
         # Insert the user into the database
-        conn = sqlite3.connect('passengers_data.db')
+        conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()
         cursor.execute('''
                 INSERT INTO users (first_name, last_name, date_of_birth, passport_number)

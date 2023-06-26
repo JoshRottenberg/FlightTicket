@@ -27,7 +27,9 @@ def flight_found(origin_city, destination_city, departure_date, num_of_seats):
     if rows:
         num_of_flights = len(rows)
         list_of_codes = []
-        print(f" We have found {num_of_flights} flights for you")
+        print()
+        print(f"We have found {num_of_flights} flights for you")
+        print()
         i = 0
         for row in rows:
             if num_of_seats < seats_avel:
@@ -42,6 +44,7 @@ def flight_found(origin_city, destination_city, departure_date, num_of_seats):
                 print(f"Arrival Time: {row[14][:-2] + ':' + row[14][-2:]}")
                 print(f"The price for this flight is: {row[17]}")
                 print()
+                print("---------------------------------------------------------------------------------------------------")
                 trans_code_id = (i, row[0])
                 list_of_codes.append(trans_code_id)
 

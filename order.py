@@ -34,7 +34,7 @@ class Order:
 
     def add_order_db(self):
         # Insert the user into the database
-        conn = sqlite3.connect('orders.db')
+        conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()
         cursor.execute('''
                 INSERT INTO orders (user_id, num_of_tickets, total_price)

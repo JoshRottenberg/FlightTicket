@@ -126,7 +126,7 @@ def main():
         if new_order.lower() == 'y' or new_order.lower() == 'yes':
             create_new_order(cur_user.get_user_id())
             break
-        elif is_new.lower() == 'n' or is_new.lower() == 'no':
+        elif new_order.lower() == 'n' or new_order.lower() == 'no':
             print("OK, see you next time")
             break
 
