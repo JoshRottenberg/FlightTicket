@@ -56,7 +56,6 @@ def check_if_user():
         print(f"Welcome back, {row[1]}!")
         current_user = User(email=user_name, password=password, is_signed_up=True)
         return current_user
-        # return True
     else:
         # User not found in the database or invalid credentials
         print("One of the details is incorrect. Please retry.")
@@ -70,7 +69,6 @@ def search_for_flights(num_of_travelers):
     while not is_available_flight:
         destination_city = input("To which city are you flying to?: ")
         departure_date = input("Please enter your departure date (yyyy/mm/dd): ")
-
         list_of_flights = flight_found(origin_city=origin_city, destination_city=destination_city, departure_date=departure_date,
                         num_of_seats=num_of_passengers)
         if list_of_flights:

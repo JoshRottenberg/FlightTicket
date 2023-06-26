@@ -2,7 +2,7 @@ import sqlite3
 from flight import Flight
 
 def flight_found(origin_city, destination_city, departure_date, num_of_seats):
-    connection = sqlite3.connect(r"C:\Users\User\PycharmProjects\pythonProject12\flights_base2.db")
+    connection = sqlite3.connect("flights_base2.db")
     cursor = connection.cursor()
 
     table_name = "Flights"
