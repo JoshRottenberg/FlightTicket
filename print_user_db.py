@@ -10,7 +10,7 @@ try:
     rows = cursor.fetchall()
 
     # Print the column headers
-    print("ID | First Name | Last Name | Phone Number | Email | Password | Is Signed Up")
+    print("ID | First Name | Last Name | Phone Number    | Email |        Password ")
 
     # Iterate over the rows and print the data
     for row in rows:
