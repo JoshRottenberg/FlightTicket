@@ -29,7 +29,10 @@ class OrderManagement:
             p_l_name = input("Please enter passenger's last name: ")
             pl_name_status = validate_name(p_l_name)
 
-        p_dob = input("Please enter passenger's D.O.B (yyyy/mm/dd): ")  # add exeptions
+        p_dob_status = False
+        while not p_dob_status:
+            p_dob = input("Please enter passenger's D.O.B (yyyy/mm/dd): ")
+            p_dob_status = validate_dob_date(p_dob)
 
         pp_num_status = False
         while not pp_num_status:
@@ -61,6 +64,10 @@ class OrderManagement:
             break
 
         new_ticket = Ticket(pass_id=pass_id, flight_id=flight_id, seat_class=seat_class,price=price, order_id=order_id)
+        return new_ticket
+
+    def delete_ticket(self):
+        pass
 
     def update_order(self, order, price):
         order._num_of_tickets += 1

@@ -10,7 +10,7 @@ class User:
         self._email = email
         self._password = password
         self._is_signed_up = is_signed_up
-        self.UserManagement.add_to_db() if not self._is_signed_up else None
+        self.add_to_db() if not self._is_signed_up else None
 
     @property
     def first_name(self):
@@ -58,7 +58,7 @@ class User:
         cursor = conn.cursor()
         cursor.execute('''
                 INSERT INTO users (first_name, last_name, phone_num, email, password)
-                VALUES (?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?)
             ''', (self._first_name, self._last_name, self._phone_num, self._email, self._password))
         conn.commit()
         conn.close()

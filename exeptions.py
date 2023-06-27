@@ -101,9 +101,34 @@ class PassportUpperCaseOrDigits(Exception):
         return f"Passport should contain uppercase letters and digits only"
 
 
+class DateNoDigits(Exception):
+    def __str__(self):
+        return f"Date must contain digits and '/' only "
+
+
 class WrongDateFormat(Exception):
     def __str__(self):
         return f"Date format must be yyyy/mm/dd"
+
+
+class DateMonthTooBig(Exception):
+    def __str__(self):
+        return f"Date month greater then 12"
+
+
+class DateDayTooBig(Exception):
+    def __str__(self):
+        return f"Date day greater then 31"
+
+
+class DateBeforeCurrnet(Exception):
+    def __str__(self):
+        return f"Date typed is before current day"
+
+
+class DateAfterCurrnet(Exception):
+    def __str__(self):
+        return f"Date typed is after current day"
 
 
 def validate_name(name):
@@ -217,16 +242,61 @@ def validate_passport(passport):
     return True
 
 
-def validate_date_format(date_str, format_str):
+def validate_date(date_str):
+    # Check if all characters are numbers except for slashes
     try:
-        if not datetime.strptime(date_str, format_str):
+        if not date_str.replace('/', '').isdigit():
+            raise DateNoDigits
+
+        # Check if date is in the right format
+        if datetime.strptime(date_str, "%Y/%m/%d"):
             raise WrongDateFormat
 
-    except WrongDateFormat as a:
+        # Convert the input date string to a datetime object
+        date_obj = datetime.strptime(date_str, "%Y/%m/%d").date()
+        # Check if month is not greater than 12
+        if date_obj.month > 12:
+            raise DateMonthTooBig
+
+        # Check if day is not greater than 31
+        if date_obj.day > 31:
+            return DateDayTooBig
+
+    except DateNoDigits as a:
         print(a)
+    except WrongDateFormat as b:
+        print(b)
+    except DateMonthTooBig as c:
+        print(c)
+    except DateDayTooBig as d:
+        print(d)
+    # All checks passed, date is valid
     return True
 
-# is_date = False
-#     while not is_date:
-#         date = input("enter date:")
-#         is_date = validate_date_format(date, "%Y/%m/%d")
+
+def validate_flight_date(date):
+    if validate_date(date):
+        # Get the current date
+        current_date = datetime.now().date()
+        date = datetime.strptime(date, "%Y/%m/%d").date()
+        # Convert the input date string to a datetime object
+        try:
+            if date < current_date:
+                raise DateBeforeCurrnet
+        except DateBeforeCurrnet as a:
+            print(a)
+        return True
+
+
+def validate_dob_date(date):
+    if validate_date(date):
+        # Get the current date
+        current_date = datetime.now().date()
+        date = datetime.strptime(date, "%Y/%m/%d").date()
+        # Convert the input date string to a datetime object
+        try:
+            if date > current_date:
+                raise DateAfterCurrnet
+        except DateAfterCurrnet as a:
+            print(a)
+        return True
