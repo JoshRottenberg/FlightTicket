@@ -90,6 +90,16 @@ class PhoneNumNotDigits(Exception):
         return f"Phone number must contain digits only"
 
 
+class PassportLengthWrong(Exception):
+    def __str__(self):
+        return f"Passport should contain exactly 9 characters"
+
+
+class UpperCaseOrDigits(Exception):
+    def __str__(self):
+        return f"Passport should contain uppercase letters and digits only"
+
+
 def validate_name(name):
     try:
         for i in range(len(name)):
@@ -184,3 +194,18 @@ def validate_email(email):
         print(c)
     except EmailIsNotValid as d:
         print(d)
+
+
+def validate_passport(passport):
+    try:
+        if len(passport) != 9:
+            raise PassportLengthWrong
+        # Check if the passport number contains only uppercase letters and digits
+        if not passport.isalnum():
+            raise UpperCaseOrDigits
+
+    except PassportLengthWrong as a:
+        print(a)
+    except UpperCaseOrDigits as b:
+        print(b)
+    return True

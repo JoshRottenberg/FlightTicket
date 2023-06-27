@@ -1,3 +1,6 @@
+import sqlite3
+
+
 class Ticket:
     def __init__(self, ticket_id, pass_id, flight_id, seat, seat_class, price):
         self._ticket_id = ticket_id
@@ -6,6 +9,7 @@ class Ticket:
         self._seat = seat
         self._seat_class = seat_class
         self._price = price
+        self.add_to_tickets_db()
 
     @property
     def ticket_id(self):
@@ -54,3 +58,14 @@ class Ticket:
     @price.setter
     def price(self, value):
         self._price = value
+
+    def add_to_tickets_db(self):
+        # Insert the user into the database
+        conn = sqlite3.connect('big_data.db')
+        cursor = conn.cursor()
+        cursor.execute('''
+                        INSERT INTO orders (passenger_id, flight_code, seat_code, seat_class, price)
+                        VALUES (?, ?, ? )
+                    ''', (self._pass_id, self._flight_id, self._seat, self._seat_class, self._price ))
+        conn.commit()
+        conn.close()

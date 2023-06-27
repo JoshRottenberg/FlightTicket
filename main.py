@@ -5,61 +5,10 @@ from ticket import Ticket
 from order import Order
 from flight import Flight
 from flights import *
-from exeptions import * 
+from exeptions import *
 import sqlite3
-
-
-def create_new_user():
-    f_name_status = False
-    while not f_name_status:
-        first_name = input("What is your first name?: ")
-        f_name_status = validate_name(first_name)
-
-    l_name_status = False
-    while not l_name_status:
-        last_name = input("What is your last name?: ")
-        l_name_status = validate_name(last_name)
-
-    p_num_status = False
-    while not p_num_status:
-        phone_num = input("Please enter your phone num: ")
-        p_num_status = validate_phone_num(phone_num)
-
-    email_status = False
-    while not email_status:
-        email = input("Please enter your Email address: ")
-        email_status = validate_email(email)
-
-    pass_status = False
-    while not pass_status:
-        new_password = input("What is your password: ")
-        pass_status = validate_password(new_password)
-
-    current_user = User(first_name=first_name, last_name=last_name, phone_num=phone_num, email=email,
-                        password=new_password)
-    return current_user
-
-
-def check_if_user():
-    user_name = input("Please enter your username (Email): ")
-    password = input("Please enter your password: ")
-    # Connect to the database
-    conn = sqlite3.connect('big_data.db')
-    cursor = conn.cursor()
-    # Execute a SELECT query to retrieve the user with the given username and password
-    cursor.execute('SELECT * FROM users WHERE email = ? AND password = ?', (user_name, password))
-    row = cursor.fetchone()
-    # Close the connection
-    conn.close()
-    if row is not None:
-        # User found in the database
-        print(f"Welcome back, {row[1]}!")
-        current_user = User(email=user_name, password=password, is_signed_up=True)
-        return current_user
-    else:
-        # User not found in the database or invalid credentials
-        print("One of the details is incorrect. Please retry.")
-        return False
+from sys_cntrl import *
+import re
 
 
 def search_for_flights(num_of_travelers):
@@ -69,8 +18,9 @@ def search_for_flights(num_of_travelers):
     while not is_available_flight:
         destination_city = input("To which city are you flying to?: ")
         departure_date = input("Please enter your departure date (yyyy/mm/dd): ")
-        list_of_flights = flight_found(origin_city=origin_city, destination_city=destination_city, departure_date=departure_date,
-                        num_of_seats=num_of_passengers)
+        list_of_flights = flight_found(origin_city=origin_city, destination_city=destination_city,
+                                       departure_date=departure_date,
+                                       num_of_seats=num_of_passengers)
         if list_of_flights:
             is_available_flight = True
 
@@ -90,30 +40,44 @@ def add_passenger():
         p_l_name = input("Please enter passenger's last name: ")
         pl_name_status = validate_name(p_l_name)
 
-    p_dob = input("Please enter passenger's D.O.B (yyyy-mm-dd): ") # add exeptions
-    p_pass_num = input("Please enter passenger's passport number: ") # add exeption
+    p_dob = input("Please enter passenger's D.O.B (yyyy-mm-dd): ")  # add exeptions
 
-    new_passenger = Passenger(first_name=p_f_name, last_name=p_l_name,dob=p_dob,passport=p_pass_num)
+    pp_num_status = False
+    while not pp_num_status:
+        p_pass_num = input("Please enter passenger's passport number: ")
+        pp_num_status = validate_passport()
+
+    new_passenger = Passenger(first_name=p_f_name, last_name=p_l_name, dob=p_dob, passport=p_pass_num)
 
 
 def create_new_order(user_id):
     user_id = user_id
     tickets_quantity = 0
     order_price = 0
-    new_order = Order(user_id=user_id,num_of_tickets=tickets_quantity,total_price=order_price)
+    new_order = Order(user_id=user_id, num_of_tickets=tickets_quantity, total_price=order_price)
     pass
+
+
+def buy_ticket(flight_code):
+    pass_id = passenger_id
+    flight_id = flight_code
+    seat_class = seat_class
+
+    new_ticket = Ticket(flight_id=flight_id, seat_class=seat_class)
+
 
 
 
 def main():
+    # managment = Controler()
     print("Hey! Welcome to the new friendly flight tickets reservation site")
     while True:
         is_new = input("Do you have an account? (y/n): ")
         if is_new.lower() == 'n' or is_new.lower() == 'no':
-            cur_user = create_new_user()
+            cur_user = Controler.create_new_user()
             break
         elif is_new.lower() == 'y' or is_new.lower() == 'yes':
-            cur_user = check_if_user()
+            cur_user = Controler.check_if_user()
             if cur_user:
                 break
 

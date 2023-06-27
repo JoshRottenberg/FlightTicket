@@ -1,4 +1,4 @@
-# import sqlite3
+import sqlite3
 #
 # # Create a connection to the database file
 # conn = sqlite3.connect('big_data.db')
@@ -25,7 +25,6 @@
 #
 #
 #
-# import sqlite3
 #
 # # Create a connection to the database file
 # conn = sqlite3.connect('big_data.db')
@@ -33,7 +32,7 @@
 # # Create a cursor object to execute SQL commands
 # cursor = conn.cursor()
 #
-# # Create the "users" table with the desired columns
+# # Create the "orders" table with the desired columns
 # cursor.execute('''
 #     CREATE TABLE IF NOT EXISTS orders (
 #         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -49,7 +48,6 @@
 #
 #
 #
-# import sqlite3
 #
 # # Create a connection to the database file
 # conn = sqlite3.connect('big_data.db')
@@ -57,7 +55,7 @@
 # # Create a cursor object to execute SQL commands
 # cursor = conn.cursor()
 #
-# # Create the "users" table with the desired columns
+# # Create the "passengers" table with the desired columns
 # cursor.execute('''
 #     CREATE TABLE IF NOT EXISTS passengers (
 #         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -71,3 +69,26 @@
 # # Commit the changes and close the connection
 # conn.commit()
 # conn.close()
+
+
+# Create a connection to the database file
+conn = sqlite3.connect('big_data.db')
+
+# Create a cursor object to execute SQL commands
+cursor = conn.cursor()
+
+# Create the "tickets" table with the desired columns
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS tickets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        passenger_id UNSIGNED,
+        flight_id TEXT,
+        seat TEXT,
+        seat_class TEXT,
+        price TEXT
+    )
+''')
+
+# Commit the changes and close the connection
+conn.commit()
+conn.close()
