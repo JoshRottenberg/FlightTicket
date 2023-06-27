@@ -11,13 +11,13 @@ class FlightManagement:
         while not is_available_flight:
             destination_city = input("To which city are you flying to?: ")
             departure_date = input("Please enter your departure date (yyyy/mm/dd): ")
-            list_of_flights = FlightManagement.flight_found(origin_city=origin_city, destination_city=destination_city,
+            list_of_flights = self.flight_found(origin_city=origin_city, destination_city=destination_city,
                                            departure_date=departure_date,
                                            num_of_seats=num_of_passengers)
             if list_of_flights:
                 is_available_flight = True
 
-        chosen_flight = FlightManagement.choose_flight(list_of_flights)
+        chosen_flight = self.choose_flight(list_of_flights)
 
         return chosen_flight
 
@@ -78,7 +78,7 @@ class FlightManagement:
 
     def choose_flight(self, list_of_flights):
         chosen_i = int(input("Choose your preferred flight: "))  # add exeption
-        chosen_code = list[chosen_i - 1][1]
+        chosen_code = list_of_flights[chosen_i - 1][1]
 
         conn = sqlite3.connect('flights_base2.db')
         cursor = conn.cursor()

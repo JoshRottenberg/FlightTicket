@@ -57,9 +57,9 @@ class User:
         conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()
         cursor.execute('''
-                INSERT INTO users (first_name, last_name, phone_num, email, password, is_signed_up)
+                INSERT INTO users (first_name, last_name, phone_num, email, password)
                 VALUES (?, ?, ?, ?, ?, ?)
-            ''', (self._first_name, self._last_name, self._phone_num, self._email, self._password, self._is_signed_up))
+            ''', (self._first_name, self._last_name, self._phone_num, self._email, self._password))
         conn.commit()
         conn.close()
 

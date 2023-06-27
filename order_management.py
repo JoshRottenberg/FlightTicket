@@ -15,10 +15,8 @@ class OrderManagement:
 
     def create_new_order(self, user_id):
         user_id = user_id
-        tickets_quantity = 0
-        order_price = 0
-        new_order = Order(user_id=user_id, num_of_tickets=tickets_quantity, total_price=order_price)
-        pass
+        new_order = Order(user_id=user_id)
+        return new_order
 
     def add_passenger(self):
         pf_name_status = False
@@ -44,10 +42,27 @@ class OrderManagement:
     def delete_passenger(self):
         pass
 
-    def add_ticket(self, pass_id, flight_id, price):
-        seat = " "
-        seat_class = ""
-        price = ""
+    def add_ticket(self, pass_id, order_id, flight_id, price):
+        while True:
+            is_upgrade = input("Do you wish to upgrade your seat? (y/n): ")
+            if is_upgrade.lower() == 'n' or is_upgrade.lower() == 'no':
+                break
+            elif is_upgrade.lower() == 'y' or is_upgrade.lower() == 'yes':
+                while True:
+                    seat_class = input("What is your preferred class? (business/first): ")
+                    if seat_class.lower() == "business":
+                        price = '$' + str(int(price[1:]) * 2)
+                        print("The price for business class is {price}")
+                        break
+                    elif seat_class.lower() == "first":
+                        price = '$' + str(int(price[1:]) * 3)
+                        print("The price for first class is {price}")
+                        break
+            break
 
-        new_ticket = Ticket(pass_id=pass_id, flight_id=flight_id, seat_class=seat_class,price=price)
-# OrderManagement()
+        new_ticket = Ticket(pass_id=pass_id, flight_id=flight_id, seat_class=seat_class,price=price, order_id=order_id)
+
+    def update_order(self, order, price):
+        order._num_of_tickets += 1
+        order._total_price += price
+

@@ -12,7 +12,7 @@ from main_management import *
 from user_management import *
 from flights_management import *
 import re
-
+import sys
 
 def main():
     process = MainManagement('process')
@@ -38,13 +38,13 @@ def main():
             break
         elif is_order.lower() == 'n' or is_order.lower() == 'no':
             print("OK, see you next time")
-            break
+            exit(1)
 
     for passenger in range(num_of_travelers):
         cur_pass = process.order_management.add_passenger()
-        cur_ticket = process.order_management.add_ticket(pass_id=cur_pass.get_pass_id(),
-                                                         flight_id=new_flight.flight_code,price=new_flight.price)
-
+        cur_ticket = process.order_management.add_ticket(pass_id=cur_pass.get_pass_id(), order_id=cur_order._order_id , flight_id=new_flight._flight_code,price=new_flight._price)
+        process.order_management.update_order(order=cur_order, price=cur_ticket._total_price)
+    print("All successful!")
 
 
 
