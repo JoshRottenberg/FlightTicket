@@ -1,4 +1,5 @@
 import string
+from datetime import datetime
 
 
 class NameContainsIllegalCharacter(Exception):
@@ -95,9 +96,14 @@ class PassportLengthWrong(Exception):
         return f"Passport should contain exactly 9 characters"
 
 
-class UpperCaseOrDigits(Exception):
+class PassportUpperCaseOrDigits(Exception):
     def __str__(self):
         return f"Passport should contain uppercase letters and digits only"
+
+
+class WrongDateFormat(Exception):
+    def __str__(self):
+        return f"Date format must be yyyy/mm/dd"
 
 
 def validate_name(name):
@@ -202,10 +208,25 @@ def validate_passport(passport):
             raise PassportLengthWrong
         # Check if the passport number contains only uppercase letters and digits
         if not passport.isalnum():
-            raise UpperCaseOrDigits
+            raise PassportUpperCaseOrDigits
 
     except PassportLengthWrong as a:
         print(a)
-    except UpperCaseOrDigits as b:
+    except PassportUpperCaseOrDigits as b:
         print(b)
     return True
+
+
+def validate_date_format(date_str, format_str):
+    try:
+        if not datetime.strptime(date_str, format_str):
+            raise WrongDateFormat
+
+    except WrongDateFormat as a:
+        print(a)
+    return True
+
+# is_date = False
+#     while not is_date:
+#         date = input("enter date:")
+#         is_date = validate_date_format(date, "%Y/%m/%d")

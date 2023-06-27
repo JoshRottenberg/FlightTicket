@@ -2,13 +2,12 @@ import sqlite3
 
 
 class Ticket:
-    def __init__(self, ticket_id, pass_id, flight_id, seat, seat_class, price):
-        self._ticket_id = ticket_id
+    def __init__(self, pass_id, flight_id, price, seat, seat_class="economy"):
         self._pass_id = pass_id
         self._flight_id = flight_id
+        self._price = price
         self._seat = seat
         self._seat_class = seat_class
-        self._price = price
         self.add_to_tickets_db()
 
     @property

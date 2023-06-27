@@ -55,8 +55,17 @@ class Passenger:
         conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()
         cursor.execute('''
-                INSERT INTO users (first_name, last_name, date_of_birth, passport_number)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO passengers (first_name, last_name, date_of_birth, passport)
+                VALUES (?, ?, ?, ?)
             ''', (self._first_name, self._last_name, self._dob, self._passport))
         conn.commit()
         conn.close()
+
+    def get_pass_id(self):
+        conn = sqlite3.connect('big_data.db')
+        cursor = conn.cursor()
+        query = f"SELECT id FROM passengers WHERE passport =  ?"
+        cursor.execute(query, (self._passport,))
+
+        output = cursor.fetchall()
+        return output[0][0]

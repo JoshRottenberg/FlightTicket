@@ -10,7 +10,7 @@ class User:
         self._email = email
         self._password = password
         self._is_signed_up = is_signed_up
-        self.add_to_DB() if not self._is_signed_up else None
+        self.UserManagement.add_to_db() if not self._is_signed_up else None
 
     @property
     def first_name(self):
@@ -52,7 +52,7 @@ class User:
     def password(self, value):
         self._password = value
 
-    def add_to_DB(self):
+    def add_to_db(self):
         # Insert the user into the database
         conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()

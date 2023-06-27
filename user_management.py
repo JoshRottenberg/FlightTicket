@@ -4,14 +4,12 @@ from passenger import Passenger
 from ticket import Ticket
 from order import Order
 from flight import Flight
-from flights import *
+from flights_management import *
 from exeptions import *
 import sqlite3
 
 
-class Controler:
-    def __init__(self):
-        pass
+class UserManagement:
 
     def create_new_user(self):
         f_name_status = False
@@ -63,5 +61,7 @@ class Controler:
             # User not found in the database or invalid credentials
             print("One of the details is incorrect. Please retry.")
             return False
+
+
 
 
