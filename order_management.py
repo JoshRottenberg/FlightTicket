@@ -60,7 +60,7 @@ class OrderManagement:
                         break
                     elif seat_class.lower() == "first":
                         price = '$' + str(int(price[1:]) * 3)
-                        print("The price for first class is {price}")
+                        print(f"The price for first class is {price}")
                         break
             break
 
