@@ -7,10 +7,10 @@ class FlightManagement:
 
     def search_for_flights(self, num_of_travelers):
         num_of_passengers = num_of_travelers
-        origin_city = input("From which city are you flying from?: ").title()
-        is_available_flight = False
 
+        is_available_flight = False
         while not is_available_flight:
+            origin_city = input("From which city are you flying from?: ").title()
             destination_city = input("To which city are you flying to?: ").title()
 
             dep_date_status = False

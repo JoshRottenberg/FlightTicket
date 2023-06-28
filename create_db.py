@@ -71,24 +71,25 @@ import sqlite3
 # conn.close()
 #
 #
-# # Create a connection to the database file
-# conn = sqlite3.connect('big_data.db')
-#
-# # Create a cursor object to execute SQL commands
-# cursor = conn.cursor()
-#
-# # Create the "tickets" table with the desired columns
-# cursor.execute('''
-#     CREATE TABLE IF NOT EXISTS tickets (
-#         id INTEGER PRIMARY KEY AUTOINCREMENT,
-#         passenger_id UNSIGNED,
-#         flight_id TEXT,
-#         seat TEXT,
-#         seat_class TEXT,
-#         price TEXT
-#     )
-# ''')
-#
-# # Commit the changes and close the connection
-# conn.commit()
-# conn.close()
+# Create a connection to the database file
+conn = sqlite3.connect('big_data.db')
+
+# Create a cursor object to execute SQL commands
+cursor = conn.cursor()
+
+# Create the "tickets" table with the desired columns
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS tickets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        passenger_id UNSIGNED,
+        order_id UNSIGNED
+        flight_id TEXT,
+        seat TEXT,
+        seat_class TEXT,
+        price TEXT
+    )
+''')
+
+# Commit the changes and close the connection
+conn.commit()
+conn.close()
