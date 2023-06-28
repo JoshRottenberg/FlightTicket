@@ -49,12 +49,17 @@ def main():
             print("OK, see you next time")
             exit(1)
 
+    total_price = 0
     for passenger in range(1, num_of_travelers+1):
         print(f"Please enter the details of passenger {passenger}")
         cur_pass = process.order_management.add_passenger()
         cur_ticket = process.order_management.add_ticket(pass_id=cur_pass.get_pass_id(),
                                                          flight_id=cur_flight.flight_code, price=cur_flight.price,
                                                          order_id=cur_order.order_id)
+        total_price += int(cur_ticket._price[1:])
+
+    cur_order._total_price = "$" + str(total_price)
+    cur_order._num_of_tickets = num_of_travelers
     print()
     print(f"Congratulations {cur_user._first_name}, you are flying to {cur_flight._destination}. Your order has been confirmed")
     print(f"Your order id is: {cur_order._order_id}")
