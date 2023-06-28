@@ -64,7 +64,7 @@ class Ticket:
         conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()
         cursor.execute('''
-                        INSERT INTO tickets (passenger_id, order_id, flight_id, seat_code, seat_class, price)
+                        INSERT INTO tickets (passenger_id, order_id, flight_id, seat, seat_class, price)
                         VALUES (?, ?, ?, ?, ?, ? )
                     ''', (self._pass_id, self._order_id, self._flight_id, self._seat, self._seat_class, self._price ))
         conn.commit()

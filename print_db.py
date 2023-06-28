@@ -115,7 +115,7 @@ try:
     rows = cursor.fetchall()
 
     # Print the column headers
-    print(" ")
+    print("passenger_id | order_id | flight_id | seat | seat_class | price ")
 
     # Iterate over the rows and print the data
     for row in rows:
