@@ -46,6 +46,7 @@ class OrderManagement:
         pass
 
     def add_ticket(self, pass_id, order_id, flight_id, price):
+        seat_class = "economy"
         while True:
             is_upgrade = input("Do you wish to upgrade your seat? (y/n): ")
             if is_upgrade.lower() == 'n' or is_upgrade.lower() == 'no':

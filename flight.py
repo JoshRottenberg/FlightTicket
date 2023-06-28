@@ -54,6 +54,14 @@ class Flight:
     def distance(self, value):
         self._distance = value
 
+    @property
+    def price(self):
+        return self._price
+
+    @price.setter
+    def price(self, value):
+        self._price = value
+
     def get_price(self):
         conn = sqlite3.connect("flights_base2.db")
         cursor = conn.cursor()
