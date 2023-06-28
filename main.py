@@ -12,6 +12,7 @@ from main_management import *
 from user_management import *
 from flights_management import *
 import re
+import sys
 
 
 def main():
@@ -38,9 +39,11 @@ def main():
             break
         elif is_order.lower() == 'n' or is_order.lower() == 'no':
             print("OK, see you next time")
-            break
+            exit(1)
+
 
     for passenger in range(num_of_travelers):
+        print(f"Let's enter the details of the {passenger+1}st passenger")
         cur_pass = process.order_management.add_passenger()
         cur_ticket = process.order_management.add_ticket(pass_id=cur_pass.get_pass_id(),
                                                          flight_id=new_flight.flight_code, price=new_flight.price,

@@ -102,3 +102,30 @@ finally:
     if conn:
         conn.close()
 
+print()
+print("tickets table")
+print()
+try:
+    # Connect to the database
+    conn = sqlite3.connect('big_data.db')
+    cursor = conn.cursor()
+
+    # Execute a SELECT query to retrieve all rows from the "users" table
+    cursor.execute('SELECT * FROM tickets')
+    rows = cursor.fetchall()
+
+    # Print the column headers
+    print(" ")
+
+    # Iterate over the rows and print the data
+    for row in rows:
+        print(row)
+
+except sqlite3.Error as e:
+    print("Error accessing the database:", e)
+
+finally:
+    # Close the connection
+    if conn:
+        conn.close()
+
