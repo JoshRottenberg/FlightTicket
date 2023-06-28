@@ -29,7 +29,12 @@ def main():
                 break
 
     print("Let's find the perfect flight for you")
-    num_of_travelers = int(input("How many travelers?: "))
+
+    not_status = False
+    while not not_status:
+        num_of_travelers = input("How many travelers?: ")
+        not_status = is_int(num_of_travelers)
+    num_of_travelers = int(num_of_travelers)
     new_flight = process.flights_management.search_for_flights(num_of_travelers)
 
     while True:
@@ -41,9 +46,8 @@ def main():
             print("OK, see you next time")
             exit(1)
 
-
-    for passenger in range(num_of_travelers):
-        print(f"Let's enter the details of the {passenger+1} passenger")
+    for passenger in range(1, num_of_travelers):
+        print(f"Please enter the details of the {passenger} passenger")
         cur_pass = process.order_management.add_passenger()
         cur_ticket = process.order_management.add_ticket(pass_id=cur_pass.get_pass_id(),
                                                          flight_id=new_flight.flight_code, price=new_flight.price,

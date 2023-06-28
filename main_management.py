@@ -19,4 +19,3 @@ class MainManagement:
         self.user_management = UserManagement()
         self.flights_management = FlightManagement()
         self.order_management = OrderManagement()
-MainManagement("gg")

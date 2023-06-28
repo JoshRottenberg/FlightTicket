@@ -131,6 +131,16 @@ class DateAfterCurrnet(Exception):
         return f"Date typed is after current day"
 
 
+class NumNotInt(Exception):
+    def __str__(self):
+        return f"number of travelers is invalid"
+
+
+class NumNotPositive(Exception):
+    def __str__(self):
+        return f"num of travelers must be positive"
+
+
 def validate_name(name):
     try:
         for i in range(len(name)):
@@ -292,7 +302,6 @@ def validate_date(date_str):
         print(d)
 
 
-
 def validate_flight_date(date):
     if validate_date(date):
         # Get the current date
@@ -307,7 +316,6 @@ def validate_flight_date(date):
             print(a)
 
 
-
 def validate_dob_date(date):
     if validate_date(date):
         # Get the current date
@@ -320,3 +328,16 @@ def validate_dob_date(date):
         except DateAfterCurrnet as a:
             print(a)
         return True
+
+
+def is_int(num):
+    try:
+        if not num.isdigit():
+            raise NumNotInt
+        if int(num) == 0:
+            raise NumNotPositive
+        return True
+    except NumNotInt as a:
+        print(a)
+    except NumNotPositive as b:
+        print(b)
