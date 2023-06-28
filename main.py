@@ -37,17 +37,20 @@ def main():
     num_of_travelers = int(num_of_travelers)
     new_flight = process.flights_management.search_for_flights(num_of_travelers)
 
+
     while True:
         is_order = input("Do you want to open a new order? (y/n): ")
+
         if is_order.lower() == 'y' or is_order.lower() == 'yes':
             cur_order = process.order_management.create_new_order(cur_user.get_user_id())
             break
+
         elif is_order.lower() == 'n' or is_order.lower() == 'no':
             print("OK, see you next time")
             exit(1)
 
-    for passenger in range(1, num_of_travelers):
-        print(f"Please enter the details of the {passenger} passenger")
+    for passenger in range(1, num_of_travelers+1):
+        print(f"Please enter the details of passenger {passenger}")
         cur_pass = process.order_management.add_passenger()
         cur_ticket = process.order_management.add_ticket(pass_id=cur_pass.get_pass_id(),
                                                          flight_id=new_flight.flight_code, price=new_flight.price,
