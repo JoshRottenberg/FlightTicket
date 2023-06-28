@@ -6,6 +6,9 @@ class Flight:
         self._company = company
         self._distance = distance
         self._price = self.get_price()
+        self._origin = self.get_origin()
+        self._destination = self.get_dest()
+
 
     def __iter__(self):
         yield self._flight_code
@@ -66,6 +69,23 @@ class Flight:
         conn = sqlite3.connect("flights_base2.db")
         cursor = conn.cursor()
         query = f"SELECT PRICE FROM Flights WHERE TRANSACTIONID =  ?"
+        cursor.execute(query, (self._flight_code,))
+
+        output = cursor.fetchall()
+        return output[0][0]
+    def get_origin(self):
+        conn = sqlite3.connect("flights_base2.db")
+        cursor = conn.cursor()
+        query = f"SELECT ORIGINCITYNAME FROM Flights WHERE TRANSACTIONID =  ?"
+        cursor.execute(query, (self._flight_code,))
+
+        output = cursor.fetchall()
+        return output[0][0]
+
+    def get_dest(self):
+        conn = sqlite3.connect("flights_base2.db")
+        cursor = conn.cursor()
+        query = f"SELECT DESTCITYNAME FROM Flights WHERE TRANSACTIONID =  ?"
         cursor.execute(query, (self._flight_code,))
 
         output = cursor.fetchall()

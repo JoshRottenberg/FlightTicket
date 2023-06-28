@@ -16,7 +16,7 @@ import sys
 
 
 def main():
-    process = MainManagement('process')
+    process = MainManagement()
     print("Hey! Welcome to the new friendly flight tickets reservation site")
     while True:
         is_new = input("Do you have an account? (y/n): ")
@@ -35,7 +35,7 @@ def main():
         num_of_travelers = input("How many travelers?: ")
         not_status = is_int(num_of_travelers)
     num_of_travelers = int(num_of_travelers)
-    new_flight = process.flights_management.search_for_flights(num_of_travelers)
+    cur_flight = process.flights_management.search_for_flights(num_of_travelers)
 
 
     while True:
@@ -53,9 +53,14 @@ def main():
         print(f"Please enter the details of passenger {passenger}")
         cur_pass = process.order_management.add_passenger()
         cur_ticket = process.order_management.add_ticket(pass_id=cur_pass.get_pass_id(),
-                                                         flight_id=new_flight.flight_code, price=new_flight.price,
+                                                         flight_id=cur_flight.flight_code, price=cur_flight.price,
                                                          order_id=cur_order.order_id)
-
+    print()
+    print(f"Congratulations {cur_user._first_name}, you are flying to {cur_flight._destination}. Your order has been confirmed")
+    print(f"Your order id is: {cur_order._order_id}")
+    print(f"You ordered {cur_order._num_of_tickets} tickets")
+    print(f"The total price for the order is: {cur_order._total_price}")
+    print(f"Have a nice flight!")
     return  # Close the main function
 
 

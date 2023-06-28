@@ -2,7 +2,7 @@ import sqlite3
 
 
 class Ticket:
-    def __init__(self, pass_id, order_id, flight_id, price, seat_class, seat=None):
+    def __init__(self, pass_id, order_id, flight_id, price, seat_class, seat):
         self._pass_id = pass_id
         self._order_id = order_id
         self._flight_id = flight_id
@@ -11,13 +11,6 @@ class Ticket:
         self._seat_class = seat_class
         self.add_to_tickets_db()
 
-    @property
-    def ticket_id(self):
-        return self._ticket_id
-
-    @ticket_id.setter
-    def ticket_id(self, value):
-        self._ticket_id = value
 
     @property
     def pass_id(self):
@@ -27,6 +20,13 @@ class Ticket:
     def pass_id(self, value):
         self._pass_id = value
 
+    @property
+    def order_id(self):
+        return self._order_id
+
+    @pass_id.setter
+    def order_id(self, value):
+        self._order_id = value
     @property
     def flight_id(self):
         return self._flight_id

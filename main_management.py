@@ -14,8 +14,7 @@ import re
 
 
 class MainManagement:
-    def __init__(self, name):
-        self._name = name
+    def __init__(self):
         self.user_management = UserManagement()
         self.flights_management = FlightManagement()
         self.order_management = OrderManagement()
