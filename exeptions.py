@@ -111,14 +111,14 @@ class WrongDateFormat(Exception):
         return f"Date format must be yyyy/mm/dd"
 
 
-class DateMonthTooBig(Exception):
+class DateMonthInvalid(Exception):
     def __str__(self):
-        return f"Date month greater then 12"
+        return f"Date month must be between 1-12"
 
 
-class DateDayTooBig(Exception):
+class DateDayInvalid(Exception):
     def __str__(self):
-        return f"Date day greater then 31"
+        return f"Date day must be between 1-31"
 
 
 class DateBeforeCurrnet(Exception):
@@ -242,6 +242,23 @@ def validate_passport(passport):
     return True
 
 
+def validate_date_format(date_str):
+    if len(date_str) != 10:
+        return False
+
+    if date_str[4] != '/' or date_str[7] != '/':
+        return False
+
+    for i in range(len(date_str)):
+        if i in [4, 7]:
+            continue
+
+        if not date_str[i].isdigit():
+            return False
+
+    return True
+
+
 def validate_date(date_str):
     # Check if all characters are numbers except for slashes
     try:
@@ -249,29 +266,31 @@ def validate_date(date_str):
             raise DateNoDigits
 
         # Check if date is in the right format
-        if datetime.strptime(date_str, "%Y/%m/%d"):
+        if not validate_date_format(date_str):
             raise WrongDateFormat
 
-        # Convert the input date string to a datetime object
-        date_obj = datetime.strptime(date_str, "%Y/%m/%d").date()
+        # Convert
+        date_month = int(date_str[5:7])
         # Check if month is not greater than 12
-        if date_obj.month > 12:
-            raise DateMonthTooBig
+        if date_month > 12 or date_month < 1:
+            raise DateMonthInvalid
 
+        date_day = int(date_str[8:10])
         # Check if day is not greater than 31
-        if date_obj.day > 31:
-            return DateDayTooBig
+        if date_day > 31 or date_day < 1:
+            raise DateDayInvalid
+        # All checks passed, date is valid
+        return True
 
     except DateNoDigits as a:
         print(a)
     except WrongDateFormat as b:
         print(b)
-    except DateMonthTooBig as c:
+    except DateMonthInvalid as c:
         print(c)
-    except DateDayTooBig as d:
+    except DateDayInvalid as d:
         print(d)
-    # All checks passed, date is valid
-    return True
+
 
 
 def validate_flight_date(date):
@@ -283,9 +302,10 @@ def validate_flight_date(date):
         try:
             if date < current_date:
                 raise DateBeforeCurrnet
+            return True
         except DateBeforeCurrnet as a:
             print(a)
-        return True
+
 
 
 def validate_dob_date(date):

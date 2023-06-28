@@ -43,10 +43,8 @@ def main():
     for passenger in range(num_of_travelers):
         cur_pass = process.order_management.add_passenger()
         cur_ticket = process.order_management.add_ticket(pass_id=cur_pass.get_pass_id(),
-                                                         flight_id=new_flight.flight_code,price=new_flight.price, order_id=cur_order.order_id)
-
-
-
+                                                         flight_id=new_flight.flight_code, price=new_flight.price,
+                                                         order_id=cur_order.order_id)
 
     return  # Close the main function
 

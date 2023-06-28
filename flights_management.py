@@ -9,12 +9,15 @@ class FlightManagement:
         num_of_passengers = num_of_travelers
         origin_city = input("From which city are you flying from?: ").title()
         is_available_flight = False
+
         while not is_available_flight:
             destination_city = input("To which city are you flying to?: ").title()
+
             dep_date_status = False
             while not dep_date_status:
                 departure_date = input("Please enter your departure date (yyyy/mm/dd): ")
                 dep_date_status = validate_flight_date(departure_date)
+
             list_of_flights = self.flight_found(origin_city=origin_city, destination_city=destination_city,
                                                 departure_date=departure_date,
                                                 num_of_seats=num_of_passengers)
