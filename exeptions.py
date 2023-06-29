@@ -358,7 +358,10 @@ def validate_choice(num, list_len):
             print(a)
 
 
-def validate_cc(cc_num):
+# def validate_cc(cc_num):
+#     if is_int(cc_num):
+#         try:
+
     pass
 
 
