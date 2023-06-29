@@ -1,6 +1,6 @@
 import sqlite3
 from flight import Flight
-from exeptions import validate_flight_date
+from exeptions import *
 
 
 class FlightManagement:

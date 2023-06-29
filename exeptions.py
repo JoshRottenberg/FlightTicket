@@ -349,9 +349,9 @@ def is_int(num):
 
 
 def validate_choice(num, list_len):
-    if is_int(num):
+    if is_int(str(num)):
         try:
-            if num < 1 or num > list_len:
+            if num > list_len:
                 raise NumOutOfRange
             return True
         except NumOutOfRange as a:
