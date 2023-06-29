@@ -3,6 +3,7 @@ from ticket import Ticket
 from order import Order
 from exeptions import *
 import random
+import sqlite3
 
 
 class OrderManagement:
@@ -43,34 +44,39 @@ class OrderManagement:
         seat_class = "economy"
         seat = self.take_seat(grade="economy")
         while True:
-            is_upgrade = input("Do you wish to upgrade your seat? (y/n): ")
+            is_upgrade = input("Do you wish to check seat upgrade options? (y/n): ")
             if is_upgrade.lower() == 'n' or is_upgrade.lower() == 'no':
                 print(f"The price for economy class is {price}, passenger seat: {seat}")
                 break
             elif is_upgrade.lower() == 'y' or is_upgrade.lower() == 'yes':
+                new_price, new_seat = "", ""
                 while True:
                     seat_class = input("What is your preferred class? (business/first): ")
                     if seat_class.lower() == "business":
-                        price = '$' + str(int(price[1:]) * 2)
-                        seat = self.take_seat(grade="business")
-                        print(f"The price for business class is {price}, passenger seat: {seat}")
+                        new_price = '$' + str(int(price[1:]) * 2)
+                        new_seat = self.take_seat(grade="business")
+                        # print(f"The price for business class is {price}, passenger seat: {seat}")
                         break
                     elif seat_class.lower() == "first":
-                        price = '$' + str(int(price[1:]) * 3)
-                        seat = self.take_seat(grade="first")
-                        print(f"The price for first class is {price}, passenger seat: {seat}")
+                        new_price = '$' + str(int(price[1:]) * 3)
+                        new_seat = self.take_seat(grade="first")
+                        # print(f"The price for first class is {price}, passenger seat: {seat}")
                         break
+                print(f"The price for {seat_class} class is {new_price}, passenger seat: {new_seat}")
+                fin_upgrade = input("Please confirm upgrade (y/n): ")
+                if fin_upgrade.lower() == 'y' or fin_upgrade.lower() == 'yes':
+                    price, seat = new_price, new_seat
+                elif fin_upgrade.lower() == 'n' or fin_upgrade.lower() == 'no':
+                    price, seat = price, seat
             break
 
-        new_ticket = Ticket(pass_id=pass_id, flight_id=flight_id, seat_class=seat_class,price=price, order_id=order_id, seat=seat)
+        new_ticket = Ticket(pass_id=pass_id, flight_id=flight_id, seat_class=seat_class, price=price, order_id=order_id,
+                            seat=seat)
         return new_ticket
 
     def delete_ticket(self):
         pass
 
-    def update_order(self, order, price):
-        order._num_of_tickets += 1
-        order._total_price += price
 
     def take_seat(self, grade):
         if grade == "economy":
@@ -110,3 +116,18 @@ class OrderManagement:
             cvv_status = validate_cvv(cvv, card_issuer)
         print("Reservation completed!!, Thank you for using our services")
 
+    def update_order(self, order, total_price, num_of_travelers):
+        order._total_price = "$" + str(total_price)
+        order._num_of_tickets = num_of_travelers
+
+        conn = sqlite3.connect("big_data.db")
+        cur = conn.cursor()
+
+        # Execute the INSERT statement
+        cur.execute("INSERT INTO orders (num_of_tickets, total_price) VALUES (?, ?)",
+                    (order._num_of_tickets, order._total_price))
+        # Commit the transaction to save the changes
+        conn.commit()
+        # Close the cursor and the connection
+        cur.close()
+        conn.close()
