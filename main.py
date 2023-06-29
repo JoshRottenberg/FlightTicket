@@ -19,6 +19,7 @@ def main():
             if cur_user:
                 break
 
+
     print("Let's find the perfect flight for you")
 
     travelers_status = False
