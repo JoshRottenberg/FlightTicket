@@ -89,9 +89,10 @@ class OrderManagement:
         print("To complete the reservation, commit payment")
         cc_status = False
         while not cc_status:
-            cc = input("Please type your Credit Card number (digits only)")
+            cc = input("Please type your Credit Card number (digits only): ")
             cc_status = validate_cc(cc)
         # Check the length of the card number and validate the card issuer
+        card_issuer = ""
         if len(cc) == 15 and cc[:2] in ['34', '37']:
             card_issuer = 'American Express'
         elif len(cc) == 16 and cc[:2] in ['51', '52', '53', '54', '55']:
@@ -101,11 +102,11 @@ class OrderManagement:
         print(f"Your card issuer is {card_issuer}")
         cc_date_status = False
         while not cc_date_status:
-            cc_date = input("Please type your Credit Card expiration date (format mm/yy)")
+            cc_date = input("Please type your Credit Card expiration date (mm/yy): ")
             cc_date_status = validate_cc_date(cc_date)
         cvv_status = False
         while not cvv_status:
-            cvv = input("Please type your cvv")
+            cvv = input("Please type your cvv: ")
             cvv_status = validate_cvv(cvv, card_issuer)
         print("Reservation completed!!, Thank you for using our services")
 

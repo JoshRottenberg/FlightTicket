@@ -161,6 +161,11 @@ class CvvInvalid(Exception):
         return f"cvv is invalid"
 
 
+class CcWrongDate(Exception):
+    def __str__(self):
+        return f"Credit Card date invalid"
+
+
 def validate_name(name):
     try:
         for i in range(len(name)):
@@ -354,7 +359,7 @@ def is_int(num):
     try:
         if not num.isdigit():
             raise NumNotInt
-        if int(num) == 0:
+        elif int(num) == 0:
             raise NumNotPositive
         return True
     except NumNotInt as a:
@@ -366,7 +371,7 @@ def is_int(num):
 def validate_choice(num, list_len):
     if is_int(str(num)):
         try:
-            if num > list_len:
+            if int(num) > list_len:
                 raise NumOutOfRange
             return True
         except NumOutOfRange as a:
@@ -383,7 +388,8 @@ def validate_cc(cc_num):
                 raise CcWrongLength
             # Multiply every other digit by 2, starting from the second-to-last digit
             digits = [int(digit) for digit in card_number]
-            doubled_digits = [(2 * digit) if index % 2 == len(card_number) % 2 else digit for index, digit in enumerate(digits)]
+            doubled_digits = [(2 * digit) if index % 2 == len(card_number) % 2 else digit for index, digit in
+                              enumerate(digits)]
             # Sum up the digits, accounting for digits greater than 9
             summed_digits = [digit - 9 if digit > 9 else digit for digit in doubled_digits]
             # Calculate the total sum
@@ -399,7 +405,21 @@ def validate_cc(cc_num):
 
 
 def validate_cc_date(cc_date):
-    pass
+    expiration_date = datetime.strptime(cc_date, '%m/%y')
+    # Get the current date
+    current_date = datetime.now()
+    # Check if expiration_date is not in the past
+    try:
+        if expiration_date < current_date:
+            raise CcWrongDate
+        # Optionally, check if expiration_date is not too far in the future
+        max_future_years = 10
+        max_future_date = current_date.replace(year=current_date.year + max_future_years)
+        if expiration_date > max_future_date:
+            return CcWrongDate
+        return True
+    except CcWrongDate as a:
+        print(a)
 
 
 def validate_cvv(cvv, issuer):
