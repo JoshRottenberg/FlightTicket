@@ -77,7 +77,6 @@ class OrderManagement:
     def delete_ticket(self):
         pass
 
-
     def take_seat(self, grade):
         if grade == "economy":
             seat_letter = random.choice([chr(i) for i in range(65, 75)])
@@ -131,3 +130,12 @@ class OrderManagement:
         # Close the cursor and the connection
         cur.close()
         conn.close()
+
+    def show_order(self, origin, destination, order_id, tick_num, tot_price):
+        print(
+            f"you are flying from {origin} to {destination}.\n"
+            f"Order id is: {order_id}\n"
+            f"Order has {tick_num} ticket\s \n"
+            f"Order's total price for is: {tot_price}\n"
+            f"Have a nice flight!"
+        )

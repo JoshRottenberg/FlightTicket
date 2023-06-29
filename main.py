@@ -21,11 +21,12 @@ def main():
 
     print("Let's find the perfect flight for you")
 
-    not_status = False
-    while not not_status:
+    travelers_status = False
+    while not travelers_status:
         num_of_travelers = input("How many travelers?: ")
-        not_status = is_int(num_of_travelers)
+        travelers_status = is_int(num_of_travelers)
     num_of_travelers = int(num_of_travelers)
+
     cur_flight = process.flights_management.search_for_flights(num_of_travelers)
 
     while True:
@@ -51,13 +52,10 @@ def main():
 
     process.order_management.payment(cur_order._total_price)
     process.order_management.update_order(order=cur_order, total_price=total_price, num_of_travelers=num_of_travelers)
-    print()
-    print(
-        f"Congratulations {cur_user._first_name}, you are flying to {cur_flight._destination}. Your order has been confirmed")
-    print(f"Your order id is: {cur_order._order_id}")
-    print(f"You ordered {cur_order._num_of_tickets} tickets")
-    print(f"The total price for the order is: {cur_order._total_price}")
-    print(f"Have a nice flight!")
+    print(f"\nCongratulations {cur_user._first_name}")
+    process.order_management.show_order(cur_flight._origin, cur_flight._destination, cur_order._order_id,
+                                        cur_order._num_of_tickets, cur_order._total_price)
+    print(f"\nHave a nice flight!")
     return  # Close the main function
 
 
