@@ -42,22 +42,6 @@ class Flight:
         self._company = value
 
     @property
-    def distance(self):
-        return self._distance
-
-    @distance.setter
-    def distance(self, value):
-        self._distance = value
-
-    @property
-    def distance(self):
-        return self._distance
-
-    @distance.setter
-    def distance(self, value):
-        self._distance = value
-
-    @property
     def price(self):
         return self._price
 
