@@ -146,6 +146,21 @@ class NumOutOfRange(Exception):
         return f"Chosen number is out of range"
 
 
+class CcWrongLength(Exception):
+    def __str__(self):
+        return f"Credit Card length inserted is wrong"
+
+
+class CcNumInvalid(Exception):
+    def __str__(self):
+        return f"Sorry, Credit Card number is invalid"
+
+
+class CvvInvalid(Exception):
+    def __str__(self):
+        return f"cvv is invalid"
+
+
 def validate_name(name):
     try:
         for i in range(len(name)):
@@ -358,16 +373,44 @@ def validate_choice(num, list_len):
             print(a)
 
 
-# def validate_cc(cc_num):
-#     if is_int(cc_num):
-#         try:
-
-    pass
+def validate_cc(cc_num):
+    # Remove spaces and dashes from the card number
+    card_number = cc_num.replace(' ', '').replace('-', '')
+    if is_int(card_number):
+        try:
+            # Check the length of the card number
+            if len(card_number) not in [13, 15, 16]:
+                raise CcWrongLength
+            # Multiply every other digit by 2, starting from the second-to-last digit
+            digits = [int(digit) for digit in card_number]
+            doubled_digits = [(2 * digit) if index % 2 == len(card_number) % 2 else digit for index, digit in enumerate(digits)]
+            # Sum up the digits, accounting for digits greater than 9
+            summed_digits = [digit - 9 if digit > 9 else digit for digit in doubled_digits]
+            # Calculate the total sum
+            total_sum = sum(summed_digits)
+            # Check if the total sum's last digit is 0
+            if total_sum % 10 != 0:
+                raise CcNumInvalid
+            return True
+        except CcWrongLength as a:
+            print(a)
+        except CcNumInvalid as b:
+            print(b)
 
 
 def validate_cc_date(cc_date):
     pass
 
 
-def validate_cvv(cvv):
-    pass
+def validate_cvv(cvv, issuer):
+    if is_int(cvv):
+        try:
+            if issuer == 'American Express':
+                if len(cvv) != 4:
+                    raise CvvInvalid
+            else:
+                if len(cvv) != 3:
+                    return CvvInvalid
+            return True
+        except CvvInvalid as a:
+            print(a)
