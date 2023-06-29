@@ -56,7 +56,7 @@ def main():
         cur_ticket = process.order_management.add_ticket(pass_id=cur_pass.get_pass_id(),
                                                          flight_id=cur_flight.flight_code, price=cur_flight.price,
                                                          order_id=cur_order.order_id)
-        total_price += int(cur_ticket._price[1:])
+    total_price = (cur_ticket._price[1:])
 
     cur_order._total_price = "$" + str(total_price)
     cur_order._num_of_tickets = num_of_travelers
@@ -66,8 +66,12 @@ def main():
     print(f"You ordered {cur_order._num_of_tickets} tickets")
     print(f"The total price for the order is: {cur_order._total_price}")
     print(f"Have a nice flight!")
-    return  # Close the main function
 
+    # payment()
+    return  # Close the main function
 
 if __name__ == "__main__":
     main()
+
+
+

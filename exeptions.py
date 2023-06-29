@@ -325,9 +325,10 @@ def validate_dob_date(date):
         try:
             if date > current_date:
                 raise DateAfterCurrnet
+            return True
         except DateAfterCurrnet as a:
             print(a)
-        return True
+
 
 
 def is_int(num):
