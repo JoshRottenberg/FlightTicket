@@ -1,21 +1,18 @@
 import sqlite3
-import random
 
-# Connect to the SQLite database
-connection = sqlite3.connect("flights_base2.db")
-cursor = connection.cursor()
+# Assuming you have a SQLite connection established
+conn = sqlite3.connect("big_data.db")
+cur = conn.cursor()
 
-# Add a new column "price" to the "Flights" table
-cursor.execute("ALTER TABLE Flights ADD COLUMN price TEXT")
+email = "1"
+password = "1"
 
-# Update each row with a random price between $150 and $800
-query = "UPDATE Flights SET price = ? WHERE TRANSACTIONID = ?"
-cursor.execute("SELECT TRANSACTIONID FROM Flights")
-transaction_ids = cursor.fetchall()
-for transaction_id in transaction_ids:
-    price = "$" + str(random.randint(150, 800))
-    cursor.execute(query, (price, transaction_id[0]))
+# Execute the INSERT statement
+cur.execute("INSERT INTO users (email, password) VALUES (?, ?)", (email, password))
 
-# Commit the changes and close the connection
-connection.commit()
-connection.close()
+# Commit the transaction to save the changes
+conn.commit()
+
+# Close the cursor and the connection
+cur.close()
+conn.close()
