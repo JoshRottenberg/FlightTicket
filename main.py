@@ -48,15 +48,16 @@ def main():
                                                          order_id=cur_order.order_id)
         total_price += int(cur_ticket._price[1:])
 
+
+    process.order_management.payment(cur_order._total_price)
+    process.order_management.update_order(order=cur_order, total_price=total_price, num_of_travelers=num_of_travelers)
     print()
-    print(f"Congratulations {cur_user._first_name}, you are flying to {cur_flight._destination}. Your order has been confirmed")
+    print(
+        f"Congratulations {cur_user._first_name}, you are flying to {cur_flight._destination}. Your order has been confirmed")
     print(f"Your order id is: {cur_order._order_id}")
     print(f"You ordered {cur_order._num_of_tickets} tickets")
     print(f"The total price for the order is: {cur_order._total_price}")
     print(f"Have a nice flight!")
-
-    process.order_management.payment(cur_order._total_price)
-    process.order_management.update_order(order=cur_order, total_price=total_price, num_of_travelers=num_of_travelers)
     return  # Close the main function
 
 
