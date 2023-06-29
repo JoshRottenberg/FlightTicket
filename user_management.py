@@ -55,20 +55,13 @@ class UserManagement:
         if row is not None:
             # User found in the database
             print(f"Welcome back, {row[1]}!")
-            current_user = User(first_name=self.get_fname(user_name), email=user_name, password=password, is_signed_up=True)
+            current_user = User(first_name=row[1], email=user_name, password=password, is_signed_up=True)
             return current_user
         else:
             # User not found in the database or invalid credentials
             print("One of the details is incorrect. Please retry.")
             return False
 
-    def get_fname(self, user_name):
-        conn = sqlite3.connect("big_data.db")
-        cursor = conn.cursor()
-        query = f"SELECT first_name FROM users WHERE email =  ?"
-        cursor.execute(query, (user_name,))
 
-        output = cursor.fetchall()
-        return output[0][0]
 
 
