@@ -345,14 +345,19 @@ def validate_dob_date(date):
     if validate_date(date):
         # Get the current date
         current_date = datetime.now().date()
-        date = datetime.strptime(date, "%Y/%m/%d").date()
-        # Convert the input date string to a datetime object
         try:
-            if date > current_date:
-                raise DateAfterCurrnet
-            return True
-        except DateAfterCurrnet as a:
-            print(a)
+            date = datetime.strptime(date, "%Y/%m/%d").date()
+            valid_day = True
+        except ValueError:
+            valid_day = False
+            print("Invalid day")
+        if valid_day:
+            try:
+                if date > current_date:
+                    raise DateAfterCurrnet
+                return True
+            except DateAfterCurrnet as a:
+                print(a)
 
 
 def is_int(num):
