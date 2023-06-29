@@ -141,6 +141,11 @@ class NumNotPositive(Exception):
         return f"num of travelers must be positive"
 
 
+class NumOutOfRange(Exception):
+    def __str__(self):
+        return f"Chosen number is out of range"
+
+
 def validate_name(name):
     try:
         for i in range(len(name)):
@@ -330,7 +335,6 @@ def validate_dob_date(date):
             print(a)
 
 
-
 def is_int(num):
     try:
         if not num.isdigit():
@@ -342,3 +346,25 @@ def is_int(num):
         print(a)
     except NumNotPositive as b:
         print(b)
+
+
+def validate_choice(num, list_len):
+    if is_int(num):
+        try:
+            if num < 1 or num > list_len:
+                raise NumOutOfRange
+            return True
+        except NumOutOfRange as a:
+            print(a)
+
+
+def validate_cc(cc_num):
+    pass
+
+
+def validate_cc_date(cc_date):
+    pass
+
+
+def validate_cvv(cvv):
+    pass

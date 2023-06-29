@@ -67,7 +67,7 @@ def main():
     print(f"The total price for the order is: {cur_order._total_price}")
     print(f"Have a nice flight!")
 
-    # payment()
+    process.order_management.payment(cur_order._total_price)
     return  # Close the main function
 
 if __name__ == "__main__":

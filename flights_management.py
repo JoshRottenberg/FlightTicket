@@ -84,7 +84,10 @@ class FlightManagement:
             return False
 
     def choose_flight(self, list_of_flights):
-        chosen_i = int(input("Choose your preferred flight: "))  # add exeption
+        choice_status = False
+        while not choice_status:
+            chosen_i = int(input("Choose your preferred flight (type it's number): "))
+            choice_status = validate_choice(chosen_i, len(list_of_flights))
         chosen_code = list_of_flights[chosen_i - 1][1]
 
         conn = sqlite3.connect('flights_base2.db')

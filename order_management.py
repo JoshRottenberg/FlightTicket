@@ -91,3 +91,20 @@ class OrderManagement:
             seat_number = random.randint(1, 6)
         seat = str(seat_number) + seat_letter
         return seat
+
+    def payment(self, total_price):
+        print("To complete the reservation, commit payment")
+        cc_status = False
+        while not cc_status:
+            cc = input("Please type your Credit Card number (digits only)")
+            cc_status = validate_cc(cc)
+        cc_date_status = False
+        while not cc_date_status:
+            cc_date = input("Please type your Credit Card expiration date (format mm/yy)")
+            cc_date_status = validate_cc_date(cc_date)
+        cvv_status = False
+        while not cvv_status:
+            cvv = input("Please type your cvv")
+            cvv_status = validate_cvv(cvv)
+        print("Reservation completed!!, Thank you for using our services")
+
