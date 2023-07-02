@@ -90,7 +90,7 @@ def main():
         total_price += int(cur_ticket.price[1:])
 
     # Process payment for the order
-    process.order_management.payment(cur_order.total_price)
+    process.order_management.payment("$" + str(total_price))
     # Update the order details
     process.order_management.update_order(order=cur_order, total_price=total_price, num_of_travelers=num_of_travelers)
 
@@ -99,7 +99,6 @@ def main():
     process.order_management.show_order(cur_flight.origin, cur_flight.destination, cur_order.order_id,
                                         cur_order.num_of_tickets, cur_order.total_price)
 
-    print(f"\nHave a nice flight!")
     return  # Close the main function
 
 
