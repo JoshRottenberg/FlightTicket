@@ -2,6 +2,16 @@ import sqlite3
 
 
 class Order:
+    """
+    The Order class represents an order in the flight ticket reservation system.
+    Attributes:
+        _user_id (int): The ID of the user associated with the order.
+        _num_of_tickets (int): The number of tickets in the order.
+        _total_price (float): The total price of the order.
+        _order_id (int): The ID of the order in the database.
+    Methods: add_order_db(): Inserts the order into the database and returns the order ID.
+
+    """
     def __init__(self, user_id, num_of_tickets=0, total_price=0):
         self._user_id = user_id
         self._num_of_tickets = num_of_tickets
@@ -42,6 +52,10 @@ class Order:
 
 
     def add_order_db(self):
+        """
+         Inserts the order into the database and returns the order ID.
+         Returns: The order ID.
+         """
         # Insert the user into the database
         conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()

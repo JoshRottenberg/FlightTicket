@@ -1,6 +1,9 @@
 import string
 from datetime import datetime
 
+"""
+This file handles Exceptions and validates all program variables 
+"""
 
 class NameContainsIllegalCharacter(Exception):
     def __init__(self, letter, index):
