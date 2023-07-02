@@ -2,6 +2,14 @@ import sqlite3
 
 
 class Passenger:
+    """
+    Initializes a new instance of the Passenger class.
+    Args:
+        first_name (str): The first name of the passenger.
+        last_name (str): The last name of the passenger.
+        dob (str): The date of birth of the passenger.
+        passport (str): The passport number of the passenger.
+    """
     def __init__(self, first_name, last_name, dob, passport):
         self._first_name = first_name
         self._last_name = last_name
@@ -42,7 +50,9 @@ class Passenger:
         self._passport = value
 
     def add_to_psngr_db(self):
-        # Insert the user into the database
+        """
+        Insert the passenger into the database
+        """
         conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()
         cursor.execute('''
@@ -53,6 +63,10 @@ class Passenger:
         conn.close()
 
     def get_pass_id(self):
+        """
+        Retrieves the passenger ID from the passenger database based on the passport number.
+        Returns: The passenger ID.
+        """
         conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()
         query = f"SELECT id FROM passengers WHERE passport =  ?"

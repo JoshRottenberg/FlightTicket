@@ -2,6 +2,9 @@ import sqlite3
 
 
 class Person:
+    """
+      Represents a person with its attributes and methods.
+      """
     def __init__(self, first_name=None, last_name=None, phone_num=None, email=None, password=None):
         self._first_name = first_name
         self._last_name = last_name
@@ -50,6 +53,10 @@ class Person:
         self._password = value
 
     def get_person_id(self):
+        """
+       Retrieves the person's ID from the user database based on the email address.
+       Returns: The person's ID.
+       """
         conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()
         query = f"SELECT id FROM users WHERE email =  ?"

@@ -3,7 +3,10 @@ import sqlite3
 
 
 class User(Person):
-
+    """
+    Represents a user with its attributes and methods.
+    Inherits from the super class Person
+    """
     def __init__(self, first_name=None, last_name=None, phone_num=None, email=None, password=None, is_signed_up=False):
         super().__init__(first_name, last_name, phone_num, email, password)
         self._is_signed_up = is_signed_up
@@ -11,7 +14,9 @@ class User(Person):
 
 
     def add_to_db(self):
-        # Insert the user into the database
+        """
+        Insert the user into the database
+        """
         conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()
         cursor.execute('''

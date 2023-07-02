@@ -4,31 +4,54 @@ from exeptions import *
 
 
 class FlightManagement:
+    """
+    Represents a flight management system with methods for searching and choosing flights.
+    """
 
     def search_for_flights(self, num_of_travelers):
+        """
+        Searches for available flights based on user input.
+        Args: num_of_travelers: The number of travelers.
+        Returns: Flight: The chosen flight.
+        """
         num_of_passengers = num_of_travelers
 
         is_available_flight = False
         while not is_available_flight:
+            # Get origin and destination cities from user
             origin_city = input("From which city are you flying from?: ").title()
             destination_city = input("To which city are you flying to?: ").title()
 
             dep_date_status = False
             while not dep_date_status:
+                # Get departure date from user and validate it
                 departure_date = input("Please enter your departure date (yyyy/mm/dd): ")
                 dep_date_status = validate_flight_date(departure_date)
 
-            list_of_flights = self.flight_found(origin_city=origin_city, destination_city=destination_city,
-                                                departure_date=departure_date,
-                                                num_of_seats=num_of_passengers)
+            # Find available flights based on user input
+            list_of_flights = self.flight_found(
+                origin_city=origin_city,
+                destination_city=destination_city,
+                departure_date=departure_date,
+                num_of_seats=num_of_passengers
+            )
+
             if list_of_flights:
                 is_available_flight = True
-
+        # Choose a flight from the available options
         chosen_flight = self.choose_flight(list_of_flights)
-
         return chosen_flight
 
     def flight_found(self, origin_city, destination_city, departure_date, num_of_seats):
+        """
+        Searches for flights that match the given criteria.
+        Args:
+            origin_city (str): The origin city.
+            destination_city (str): The destination city.
+            departure_date (str): The departure date.
+            num_of_seats (int): The number of seats needed.
+        Returns: list: A list of flight codes and their indexes.
+        """
         connection = sqlite3.connect("flights_base2.db")
         cursor = connection.cursor()
 
@@ -45,8 +68,8 @@ class FlightManagement:
         rows = cursor.fetchall()
 
         for row in rows:
-            seats_avel = row[16]
-            if num_of_seats > seats_avel:
+            seats_avail = row[16]
+            if num_of_seats > seats_avail:
                 print("There are not enough available seats in any of the flights")
                 return False
 
@@ -58,7 +81,7 @@ class FlightManagement:
             print()
             i = 0
             for row in rows:
-                if num_of_seats < seats_avel:
+                if num_of_seats < seats_avail:
                     i += 1
                     print(f"Flight number {i}")
                     print("Flight Details:")
@@ -84,15 +107,23 @@ class FlightManagement:
             return False
 
     def choose_flight(self, list_of_flights):
+        """
+        Allows the user to choose a flight from the list of available flights.
+        Args:  list_of_flights: A list of flight codes and their indexes.
+        Returns: Flight: The chosen flight.
+        """
         choice_status = False
         while not choice_status:
-            chosen_i = input("Choose your preferred flight (type it's number): ")
+            chosen_i = input("Choose your preferred flight (type its number): ")
             choice_status = validate_choice(chosen_i, len(list_of_flights))
         chosen_code = list_of_flights[int(chosen_i) - 1][1]
 
         conn = sqlite3.connect('flights_base2.db')
         cursor = conn.cursor()
+
+        # Get the transaction ID of the chosen flight
         transaction_id = f'{chosen_code}'
+        # Retrieve the flight details from the database
         cursor.execute("SELECT * FROM Flights WHERE TRANSACTIONID = ?", (transaction_id,))
         row = cursor.fetchone()
 
@@ -101,4 +132,4 @@ class FlightManagement:
             new_flight = Flight(flight_code=row[0], date=row[1], company=row[3])
             return new_flight
         else:
-            print("there is a problem")
+            print("There is a problem")

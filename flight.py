@@ -2,7 +2,17 @@ import sqlite3
 
 
 class Flight:
+    """
+      Represents a flight with its attributes and methods.
+      """
     def __init__(self, flight_code, date, company):
+        """
+        Initializes a Flight object with the provided flight code, date, and company.
+        Args:
+            flight_code (str): The flight code.
+            date (str): The date of the flight.
+            company (str): The company operating the flight.
+        """
         self._flight_code = flight_code
         self._date = date
         self._company = company
@@ -59,6 +69,10 @@ class Flight:
         self._destination = value
 
     def get_price(self):
+        """
+        Retrieves the price of the flight from the database.
+        Returns: The price of the flight.
+        """
         conn = sqlite3.connect("flights_base2.db")
         cursor = conn.cursor()
         query = f"SELECT PRICE FROM Flights WHERE TRANSACTIONID =  ?"
@@ -68,6 +82,10 @@ class Flight:
         return output[0][0]
 
     def get_origin(self):
+        """
+        Retrieves the origin city of the flight from the database.
+        Returns: The origin city of the flight.
+        """
         conn = sqlite3.connect("flights_base2.db")
         cursor = conn.cursor()
         query = f"SELECT ORIGINCITYNAME FROM Flights WHERE TRANSACTIONID =  ?"
@@ -77,6 +95,10 @@ class Flight:
         return output[0][0]
 
     def get_dest(self):
+        """
+         Retrieves the destination city of the flight from the database.
+         Returns: The destination city of the flight.
+         """
         conn = sqlite3.connect("flights_base2.db")
         cursor = conn.cursor()
         query = f"SELECT DESTCITYNAME FROM Flights WHERE TRANSACTIONID =  ?"

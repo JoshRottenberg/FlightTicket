@@ -2,6 +2,9 @@ import sqlite3
 
 
 class Ticket:
+    """
+    Represents a ticket with its attributes and methods.
+    """
     def __init__(self, pass_id, order_id, flight_id, price, seat_class, seat):
         self._pass_id = pass_id
         self._order_id = order_id
@@ -60,7 +63,9 @@ class Ticket:
         self._price = value
 
     def add_to_tickets_db(self):
-        # Insert the user into the database
+        """
+        Insert the user into the database
+        """
         conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()
         cursor.execute('''
