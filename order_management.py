@@ -14,6 +14,10 @@ class OrderManagement:
         return new_order
 
     def add_passenger(self):
+        """
+
+        :return:
+        """
         pf_name_status = False
         while not pf_name_status:
             p_f_name = input("Please enter passenger's first name: ")
@@ -86,7 +90,7 @@ class OrderManagement:
         return seat
 
     def payment(self, total_price):
-        print("To complete the reservation, commit payment")
+        print(f"To complete the reservation, commit payment. total reservation price is {total_price}")
         cc_status = False
         while not cc_status:
             cc = input("Please type your Credit Card number (digits only): ")
@@ -111,15 +115,15 @@ class OrderManagement:
         print("Reservation completed!!, Thank you for using our services")
 
     def update_order(self, order, total_price, num_of_travelers):
-        order._total_price = "$" + str(total_price)
-        order._num_of_tickets = num_of_travelers
+        order.total_price = "$" + str(total_price)
+        order.num_of_tickets = num_of_travelers
 
         conn = sqlite3.connect("big_data.db")
         cur = conn.cursor()
 
         # Execute the INSERT statement
         cur.execute("INSERT INTO orders (num_of_tickets, total_price) VALUES (?, ?)",
-                    (order._num_of_tickets, order._total_price))
+                    (order.num_of_tickets, order.total_price))
         # Commit the transaction to save the changes
         conn.commit()
         # Close the cursor and the connection

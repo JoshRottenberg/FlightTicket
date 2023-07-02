@@ -28,7 +28,10 @@ class UserManagement:
 
         pass_status = False
         while not pass_status:
-            new_password = input("What is your password: ")
+            print("Password must contain: \n"
+                  "Upper and Lower case letters\n"
+                  "number and special char, at list 8 chars")
+            new_password = input("Set a password: ")
             pass_status = validate_password(new_password)
 
         current_user = User(first_name=first_name, last_name=last_name, phone_num=phone_num, email=email,
