@@ -112,10 +112,10 @@ class FlightManagement:
         Args:  list_of_flights: A list of flight codes and their indexes.
         Returns: Flight: The chosen flight.
         """
-        choice_status = False
-        while not choice_status:
+        while True:
             chosen_i = input("Choose your preferred flight (type its number): ")
-            choice_status = validate_choice(chosen_i, len(list_of_flights))
+            if validate_choice(chosen_i, len(list_of_flights)):
+                break
         chosen_code = list_of_flights[int(chosen_i) - 1][1]
 
         conn = sqlite3.connect('flights_base2.db')
