@@ -37,8 +37,6 @@ class OrderManagement:
         new_passenger = Passenger(first_name=p_f_name, last_name=p_l_name, dob=p_dob, passport=p_pass_num)
         return new_passenger
 
-    def delete_passenger(self):
-        pass
 
     def add_ticket(self, pass_id, order_id, flight_id, price):
         seat_class = "economy"
@@ -73,9 +71,6 @@ class OrderManagement:
         new_ticket = Ticket(pass_id=pass_id, flight_id=flight_id, seat_class=seat_class, price=price, order_id=order_id,
                             seat=seat)
         return new_ticket
-
-    def delete_ticket(self):
-        pass
 
     def take_seat(self, grade):
         if grade == "economy":
@@ -133,7 +128,7 @@ class OrderManagement:
 
     def show_order(self, origin, destination, order_id, tick_num, tot_price):
         print(
-            f"you are flying from {origin} to {destination}.\n"
+            f"You are flying from {origin} to {destination}.\n"
             f"Order id is: {order_id}\n"
             f"Order has {tick_num} ticket\s \n"
             f"Order's total price for is: {tot_price}\n"

@@ -1,7 +1,7 @@
 import sqlite3
 
 # Assuming you have a SQLite connection established
-conn = sqlite3.connect("big_data.db")
+conn = sqlite3.connect("../big_data.db")
 cur = conn.cursor()
 
 email = "1"

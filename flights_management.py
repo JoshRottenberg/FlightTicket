@@ -98,7 +98,7 @@ class FlightManagement:
 
         if row:
             chosen_flight = row
-            new_flight = Flight(flight_code=row[0], date=row[1], company=row[3], distance=row[15])
+            new_flight = Flight(flight_code=row[0], date=row[1], company=row[3])
             return new_flight
         else:
             print("there is a problem")

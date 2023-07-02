@@ -1,12 +1,10 @@
-from user import User
+from person import Person
 import sqlite3
 
 
-class Admin(User):
-    def __init__(self, id, name, last_name, phone_num, email, password):
-        super().__init__(id, name, last_name, phone_num, email, password)
+class Admin(Person):
 
-    def delete_user(user_id):
+    def delete_user(self, user_id):
         # Connect to the database
         conn = sqlite3.connect('big_data.db')
         cursor = conn.cursor()

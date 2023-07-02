@@ -1,7 +1,7 @@
 import sqlite3
 
 # Connect to the database
-connection = sqlite3.connect("big_data.db")
+connection = sqlite3.connect("../big_data.db")
 cursor = connection.cursor()
 
 # Fetch the table names from the database

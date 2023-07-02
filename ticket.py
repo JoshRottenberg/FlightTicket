@@ -11,7 +11,6 @@ class Ticket:
         self._seat_class = seat_class
         self.add_to_tickets_db()
 
-
     @property
     def pass_id(self):
         return self._pass_id
@@ -24,9 +23,10 @@ class Ticket:
     def order_id(self):
         return self._order_id
 
-    @pass_id.setter
+    @order_id.setter
     def order_id(self, value):
         self._order_id = value
+
     @property
     def flight_id(self):
         return self._flight_id
@@ -66,6 +66,6 @@ class Ticket:
         cursor.execute('''
                         INSERT INTO tickets (passenger_id, order_id, flight_id, seat, seat_class, price)
                         VALUES (?, ?, ?, ?, ?, ? )
-                    ''', (self._pass_id, self._order_id, self._flight_id, self._seat, self._seat_class, self._price ))
+                    ''', (self._pass_id, self._order_id, self._flight_id, self._seat, self._seat_class, self._price))
         conn.commit()
         conn.close()

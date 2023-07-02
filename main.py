@@ -19,7 +19,6 @@ def main():
             if cur_user:
                 break
 
-
     print("Let's find the perfect flight for you")
 
     travelers_status = False
@@ -34,7 +33,7 @@ def main():
         is_order = input("Do you want to open a new order? (y/n): ")
 
         if is_order.lower() == 'y' or is_order.lower() == 'yes':
-            cur_order = process.order_management.create_new_order(cur_user.get_user_id())
+            cur_order = process.order_management.create_new_order(cur_user.get_person_id())
             break
 
         elif is_order.lower() == 'n' or is_order.lower() == 'no':
@@ -48,16 +47,14 @@ def main():
         cur_ticket = process.order_management.add_ticket(pass_id=cur_pass.get_pass_id(),
                                                          flight_id=cur_flight.flight_code, price=cur_flight.price,
                                                          order_id=cur_order.order_id)
-        total_price += int(cur_ticket._price[1:])
+        total_price += int(cur_ticket.price[1:])
 
-
-    process.order_management.payment(cur_order._total_price)
+    process.order_management.payment(cur_order.total_price)
     process.order_management.update_order(order=cur_order, total_price=total_price, num_of_travelers=num_of_travelers)
-    print(f"\nCongratulations {cur_user._first_name}")
-    process.order_management.show_order(cur_flight._origin, cur_flight._destination, cur_order._order_id,
-                                        cur_order._num_of_tickets, cur_order._total_price)
-    print(f"\nHave a nice flight!")
-    return  # Close the main function
+    print(f"\nCongratulations {cur_user.first_name}")
+    process.order_management.show_order(cur_flight.origin, cur_flight.destination, cur_order.order_id,
+                                        cur_order.num_of_tickets, cur_order.total_price)
+    return
 
 
 if __name__ == "__main__":

@@ -3,20 +3,11 @@ import sqlite3
 
 class Passenger:
     def __init__(self, first_name, last_name, dob, passport):
-        self._id = None
         self._first_name = first_name
         self._last_name = last_name
         self._dob = dob
         self._passport = passport
         self.add_to_psngr_db()
-
-    @property
-    def id(self):
-        return self._id
-
-    @id.setter
-    def id(self, value):
-        self._id = value
 
     @property
     def first_name(self):

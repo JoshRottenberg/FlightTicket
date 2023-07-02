@@ -36,8 +36,8 @@ class Order:
     def order_id(self):
         return self._order_id
 
-    @user_id.setter
-    def user_id(self, value):
+    @order_id.setter
+    def order_id(self, value):
         self._order_id = value
 
 
@@ -49,7 +49,7 @@ class Order:
             INSERT INTO orders (user_id, num_of_tickets, total_price)
             VALUES (?, ?, ?)
         ''', (self._user_id, self._num_of_tickets, self._total_price))
-        order_id = cursor.lastrowid  # Retrieve the auto-incremented ID
+        order_id = cursor.lastrowid
         conn.commit()
         conn.close()
         return order_id

@@ -3,7 +3,7 @@ print("users table")
 print()
 try:
     # Connect to the database
-    conn = sqlite3.connect('big_data.db')
+    conn = sqlite3.connect('../big_data.db')
     cursor = conn.cursor()
 
     # Execute a SELECT query to retrieve all rows from the "users" table
@@ -51,7 +51,7 @@ print("orders table")
 print()
 try:
     # Connect to the database
-    conn = sqlite3.connect('big_data.db')
+    conn = sqlite3.connect('../big_data.db')
     cursor = conn.cursor()
 
     # Execute a SELECT query to retrieve all rows from the "users" table
@@ -80,7 +80,7 @@ print("passengers table")
 print()
 try:
     # Connect to the database
-    conn = sqlite3.connect('big_data.db')
+    conn = sqlite3.connect('../big_data.db')
     cursor = conn.cursor()
 
     # Execute a SELECT query to retrieve all rows from the "users" table
@@ -107,7 +107,7 @@ print("tickets table")
 print()
 try:
     # Connect to the database
-    conn = sqlite3.connect('big_data.db')
+    conn = sqlite3.connect('../big_data.db')
     cursor = conn.cursor()
 
     # Execute a SELECT query to retrieve all rows from the "users" table

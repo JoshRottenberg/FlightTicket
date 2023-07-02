@@ -72,7 +72,7 @@ import sqlite3
 #
 #
 # Create a connection to the database file
-conn = sqlite3.connect('big_data.db')
+conn = sqlite3.connect('../big_data.db')
 
 # Create a cursor object to execute SQL commands
 cursor = conn.cursor()
